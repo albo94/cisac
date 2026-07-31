@@ -1,0 +1,604 @@
+/* ============================================================
+   CISAC Protezione Catodica srl — foglio di stile unico
+   Palette originale: navy #122F88 · giallo #FFD600 · testo #605E5E
+   ============================================================ */
+
+/* --- 1. VARIABILI ------------------------------------------ */
+:root {
+	--navy:        #122f88;
+	--navy-dark:   #0c1f5e;
+	--navy-soft:   #eef1fa;
+	--yellow:      #ffd600;
+	--yellow-dark: #e7c200;
+	--text:        #605e5e;
+	--text-soft:   #8a8888;
+	--white:       #ffffff;
+	--gray:        #f7f8fa;
+	--line:        #e6e8ee;
+	--radius:      3px;
+	--shadow:      0 2px 12px rgba(18, 47, 136, .07);
+	--shadow-lg:   0 12px 34px rgba(18, 47, 136, .13);
+	--wrap:        1200px;
+}
+
+/* --- 2. RESET ----------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+
+body {
+	margin: 0;
+	font-family: 'Barlow', 'Trebuchet MS', Arial, sans-serif;
+	font-weight: 300;
+	font-size: 18px;
+	line-height: 1.8;
+	color: var(--text);
+	background: var(--white);
+	-webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--navy); text-decoration: none; transition: color .18s; }
+a:hover { color: var(--yellow-dark); }
+
+h1, h2, h3, h4 {
+	font-family: 'Raleway', Arial, sans-serif;
+	color: var(--navy);
+	line-height: 1.22;
+	margin: 0 0 .6em;
+	font-weight: 600;
+}
+h1 { font-size: clamp(1.9rem, 3.8vw, 2.85rem); }
+h2 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); }
+h3 { font-size: 1.2rem; font-weight: 600; }
+p  { margin: 0 0 1.1em; }
+
+strong { font-weight: 600; color: #4a4949; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 26px; }
+
+/* --- 3. HEADER (fascia navy) -------------------------------- */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	background: var(--navy);
+	color: var(--white);
+}
+
+.header-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	padding-top: 12px;
+}
+
+.brand { display: flex; align-items: baseline; gap: 9px; color: var(--white); }
+.brand:hover { color: var(--white); }
+.brand-name {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+	letter-spacing: .01em;
+	white-space: nowrap;
+}
+.brand-name b { font-weight: 700; }
+.brand-name span { font-size: .8em; font-weight: 300; }
+
+/* pill di contatto */
+.pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border: 2px solid var(--yellow);
+	border-radius: 40px;
+	padding: 6px 18px;
+	color: var(--white);
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .84rem;
+	white-space: nowrap;
+	transition: background .2s, color .2s;
+}
+.pill:hover { background: var(--yellow); color: var(--navy); }
+.pill svg { width: 13px; height: 13px; fill: currentColor; flex: none; }
+
+.header-bottom {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 20px;
+	padding-bottom: 0;
+}
+.header-contacts { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
+
+.social-sq {
+	width: 34px; height: 34px;
+	background: var(--yellow);
+	border-radius: 2px;
+	display: flex; align-items: center; justify-content: center;
+	flex: none;
+	transition: background .2s;
+}
+.social-sq svg { width: 17px; height: 17px; fill: var(--navy); }
+.social-sq:hover { background: var(--white); }
+
+/* --- 4. NAVIGAZIONE ----------------------------------------- */
+.main-nav ul {
+	list-style: none;
+	display: flex;
+	align-items: flex-end;
+	gap: 0;
+	margin: 0;
+	padding: 0;
+}
+.main-nav li { position: relative; }
+.main-nav a {
+	display: block;
+	padding: 12px 22px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	color: var(--white);
+	transition: background .18s, color .18s;
+}
+.main-nav a:hover { background: rgba(255, 214, 0, .22); color: var(--white); }
+
+.main-nav a.current { background: var(--yellow); color: var(--navy); font-weight: 500; }
+/* freccetta sotto la voce attiva */
+.main-nav a.current::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -11px;
+	transform: translateX(-50%);
+	border-left: 11px solid transparent;
+	border-right: 11px solid transparent;
+	border-top: 11px solid var(--yellow);
+}
+
+.hamburger {
+	display: none;
+	background: none;
+	border: 0;
+	cursor: pointer;
+	padding: 8px;
+	width: 46px;
+	height: 46px;
+}
+.hamburger span {
+	display: block;
+	height: 2px;
+	width: 26px;
+	margin: 6px auto;
+	background: var(--yellow);
+	transition: transform .25s, opacity .25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.mobile-nav {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: var(--navy);
+	z-index: 99;
+	padding: 120px 26px 60px;
+	overflow-y: auto;
+}
+.mobile-nav.open { display: block; }
+.mobile-nav ul { list-style: none; margin: 0; padding: 0; }
+.mobile-nav a {
+	display: block;
+	padding: 15px 4px;
+	border-bottom: 1px solid rgba(255,255,255,.16);
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+	font-size: 1.1rem;
+	color: var(--white);
+}
+.mobile-nav a.current { color: var(--yellow); }
+.mobile-nav .mobile-contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+/* --- 5. BOTTONI --------------------------------------------- */
+.btn {
+	display: inline-block;
+	padding: 13px 32px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .86rem;
+	letter-spacing: .09em;
+	text-transform: uppercase;
+	border-radius: var(--radius);
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: background .2s, color .2s, border-color .2s;
+}
+.btn-yellow { background: var(--yellow); color: var(--navy); border-color: var(--yellow); }
+.btn-yellow:hover { background: var(--yellow-dark); border-color: var(--yellow-dark); color: var(--navy); }
+.btn-navy { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.btn-navy:hover { background: var(--navy-dark); border-color: var(--navy-dark); color: var(--white); }
+.btn-outline { border-color: var(--navy); color: var(--navy); background: transparent; }
+.btn-outline:hover { background: var(--navy); color: var(--white); }
+.btn-outline-yellow { border-color: var(--yellow); color: var(--navy); background: transparent; }
+.btn-outline-yellow:hover { background: var(--yellow); color: var(--navy); }
+
+/* --- 6. HERO (bianco) --------------------------------------- */
+.hero { padding: 68px 0 60px; background: var(--white); }
+.hero-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 56px;
+	align-items: center;
+}
+.hero .eyebrow {
+	display: inline-block;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .76rem;
+	letter-spacing: .22em;
+	text-transform: uppercase;
+	color: var(--navy);
+	background: var(--yellow);
+	padding: 5px 14px;
+	margin-bottom: 20px;
+}
+.hero h1 { margin-bottom: .4em; }
+.hero p { font-size: 1.12rem; max-width: 46ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.hero-logo img { max-height: 320px; width: auto; margin: 0 auto; }
+
+/* hero pagine interne */
+.page-hero { background: var(--white); padding: 56px 0 10px; }
+.page-hero h1 { margin-bottom: .3em; }
+.page-hero h1::after {
+	content: "";
+	display: block;
+	width: 84px;
+	height: 6px;
+	background: var(--yellow);
+	margin-top: 18px;
+}
+.page-hero p { max-width: 70ch; margin: 20px 0 0; }
+
+/* --- 7. SEZIONI --------------------------------------------- */
+section { padding: 68px 0; }
+.sec-gray { background: var(--gray); }
+.sec-navy { background: var(--navy); color: rgba(255,255,255,.9); }
+.sec-navy h2, .sec-navy h3 { color: var(--white); }
+
+.sec-head { max-width: 800px; margin-bottom: 46px; }
+.sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.sec-head .kicker {
+	display: inline-block;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .74rem;
+	letter-spacing: .22em;
+	text-transform: uppercase;
+	color: var(--navy);
+	border-bottom: 4px solid var(--yellow);
+	padding-bottom: 5px;
+	margin-bottom: 16px;
+}
+.sec-head p { margin-bottom: 0; }
+
+/* --- 8. INTRO / FATTI --------------------------------------- */
+.intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.intro-grid .lead { font-size: 1.16rem; color: #4a4949; }
+
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.fact {
+	background: var(--white);
+	border: 1px solid var(--line);
+	border-bottom: 5px solid var(--yellow);
+	padding: 24px 16px;
+	text-align: center;
+}
+.fact .num {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: 2.1rem;
+	color: var(--navy);
+	display: block;
+	line-height: 1;
+}
+.fact .lbl {
+	font-size: .76rem;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--text-soft);
+	display: block;
+	margin-top: 8px;
+}
+
+.info-box {
+	margin-top: 26px;
+	background: var(--gray);
+	border-left: 6px solid var(--yellow);
+	padding: 26px 28px;
+}
+.info-box p:last-child { margin-bottom: 0; }
+
+/* --- 9. CARD SERVIZI ---------------------------------------- */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.card {
+	background: var(--white);
+	border: 1px solid var(--line);
+	padding: 34px 30px;
+	transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--yellow); }
+.card .ico {
+	width: 54px; height: 54px;
+	background: var(--yellow);
+	display: flex; align-items: center; justify-content: center;
+	margin-bottom: 20px;
+}
+.card .ico svg { width: 25px; height: 25px; fill: var(--navy); }
+.card h3 { margin-bottom: .45em; }
+.card p { margin: 0; font-size: .98rem; }
+
+/* --- 10. MISSION / VISION ----------------------------------- */
+.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+.mv {
+	background: var(--white);
+	border: 1px solid var(--line);
+	border-top: 6px solid var(--navy);
+	padding: 40px 38px;
+}
+.mv.vision { border-top-color: var(--yellow); }
+.mv h2 { font-size: 1.4rem; letter-spacing: .04em; text-transform: uppercase; }
+.mv p { font-size: 1rem; }
+.mv p:last-child { margin-bottom: 0; }
+
+.values { display: flex; flex-wrap: wrap; gap: 9px; margin: 4px 0 22px; padding: 0; list-style: none; }
+.values li {
+	background: var(--yellow);
+	color: var(--navy);
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .7rem;
+	letter-spacing: .13em;
+	text-transform: uppercase;
+	padding: 6px 14px;
+}
+
+/* --- 11. CERTIFICAZIONI ------------------------------------- */
+.cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.cert {
+	background: var(--white);
+	border: 1px solid var(--line);
+	padding: 26px 24px;
+	display: flex;
+	gap: 18px;
+	align-items: flex-start;
+}
+.cert .badge {
+	flex: none;
+	width: 52px; height: 52px;
+	background: var(--navy);
+	color: var(--white);
+	display: flex; align-items: center; justify-content: center;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .68rem;
+	letter-spacing: .03em;
+	text-align: center;
+	line-height: 1.15;
+}
+.cert h3 { font-size: 1rem; margin-bottom: .3em; }
+.cert p { margin: 0; font-size: .93rem; }
+
+/* --- 12. REFERENZE ------------------------------------------ */
+.logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 18px; }
+.logo-cell {
+	background: var(--white);
+	border: 1px solid var(--line);
+	height: 132px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 22px;
+	transition: box-shadow .22s, border-color .22s, transform .22s;
+}
+.logo-cell:hover { box-shadow: var(--shadow); border-color: var(--yellow); transform: translateY(-3px); }
+.logo-cell img {
+	max-height: 100%;
+	max-width: 100%;
+	width: auto;
+	object-fit: contain;
+	filter: grayscale(100%);
+	opacity: .68;
+	transition: filter .25s, opacity .25s;
+}
+.logo-cell:hover img { filter: grayscale(0); opacity: 1; }
+
+/* --- 13. SQUADRA -------------------------------------------- */
+.team-note {
+	background: var(--gray);
+	border-left: 6px solid var(--yellow);
+	padding: 24px 28px;
+	margin-bottom: 48px;
+	font-size: 1rem;
+}
+.team-note p:last-child { margin-bottom: 0; }
+
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 24px; }
+.member {
+	background: var(--white);
+	border: 1px solid var(--line);
+	padding: 30px 24px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.member:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--yellow); }
+.member .avatar {
+	width: 92px; height: 92px;
+	margin: 0 auto 16px;
+	border-radius: 50%;
+	background: var(--navy-soft);
+	display: flex; align-items: center; justify-content: center;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: 1.55rem;
+	color: var(--navy);
+	border: 4px solid var(--white);
+	box-shadow: 0 0 0 1px var(--line);
+}
+.member.lead .avatar { background: var(--yellow); color: var(--navy); }
+.member h3 { font-size: 1.1rem; margin-bottom: .1em; }
+.member .role {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .7rem;
+	letter-spacing: .16em;
+	text-transform: uppercase;
+	color: var(--text-soft);
+	margin-bottom: 16px;
+}
+.member .certs { list-style: none; margin: 0 0 16px; padding: 0; font-size: .87rem; flex: 1; }
+.member .certs li { padding: 3px 0; }
+.member .contacts { border-top: 1px solid var(--line); padding-top: 14px; font-size: .87rem; }
+.member .contacts a { display: block; word-break: break-word; }
+
+/* --- 14. CONTATTI ------------------------------------------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+.contact-list { display: grid; gap: 14px; }
+.contact-item {
+	display: flex;
+	gap: 16px;
+	background: var(--white);
+	border: 1px solid var(--line);
+	padding: 18px 22px;
+	transition: border-color .2s;
+}
+.contact-item:hover { border-color: var(--yellow); }
+.contact-item .ico {
+	flex: none;
+	width: 40px; height: 40px;
+	background: var(--yellow);
+	display: flex; align-items: center; justify-content: center;
+}
+.contact-item .ico svg { width: 18px; height: 18px; fill: var(--navy); }
+.contact-item .lbl {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .68rem;
+	letter-spacing: .16em;
+	text-transform: uppercase;
+	color: var(--text-soft);
+	display: block;
+}
+.contact-item .val { font-size: 1.02rem; color: var(--navy); }
+
+.map-embed { border: 1px solid var(--line); overflow: hidden; line-height: 0; }
+.map-embed iframe { width: 100%; height: 430px; border: 0; }
+
+.contact-form { display: grid; gap: 16px; }
+.field label {
+	display: block;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 600;
+	font-size: .76rem;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--text-soft);
+	margin-bottom: 6px;
+}
+.field input, .field textarea {
+	width: 100%;
+	padding: 12px 14px;
+	font-family: inherit;
+	font-size: 1rem;
+	color: #3d3d3d;
+	background: var(--white);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+}
+.field input:focus, .field textarea:focus { outline: 3px solid var(--yellow); border-color: var(--yellow); }
+.field textarea { resize: vertical; min-height: 150px; }
+.form-note { font-size: .86rem; color: var(--text-soft); margin: 0; }
+
+/* --- 15. BANNER CTA ----------------------------------------- */
+.cta-banner { background: var(--gray); text-align: center; border-top: 1px solid var(--line); }
+.cta-banner p { max-width: 62ch; margin: 0 auto 28px; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* --- 16. BANDA GIALLA + FOOTER ------------------------------ */
+.footer-strip {
+	background: var(--yellow);
+	color: var(--navy);
+	text-align: center;
+	padding: 14px 20px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	font-size: 1.15rem;
+	letter-spacing: .3em;
+	text-transform: uppercase;
+}
+
+.site-footer { background: var(--navy); color: rgba(255,255,255,.78); padding: 54px 0 0; font-size: .95rem; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1.2fr; gap: 42px; }
+.site-footer h4 {
+	color: var(--yellow);
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: .78rem;
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	margin-bottom: 18px;
+}
+.site-footer a { color: rgba(255,255,255,.78); }
+.site-footer a:hover { color: var(--yellow); }
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { padding: 4px 0; }
+.footer-logo { background: var(--white); padding: 14px; max-width: 250px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; margin-top: 16px; }
+.footer-bottom {
+	margin-top: 42px;
+	border-top: 1px solid rgba(255,255,255,.16);
+	padding: 20px 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px 24px;
+	justify-content: space-between;
+	font-size: .85rem;
+}
+
+/* --- 17. REVEAL --------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+	.reveal { opacity: 1; transform: none; transition: none; }
+	html { scroll-behavior: auto; }
+}
+
+/* --- 18. RESPONSIVE ----------------------------------------- */
+@media (max-width: 1150px) {
+	.main-nav, .header-contacts .pill { display: none; }
+	.header-top .pill { display: none; }
+	.hamburger { display: block; }
+	.header-top { padding: 14px 0; }
+	.header-bottom { display: none; }
+	.header-top { justify-content: space-between; }
+	.hero-grid, .intro-grid, .mv-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+	.cards, .cert-grid { grid-template-columns: repeat(2, 1fr); }
+	.footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+	body { font-size: 17px; }
+	section { padding: 48px 0; }
+	.cards, .cert-grid, .facts, .footer-grid { grid-template-columns: 1fr; }
+	.logo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+	.mv { padding: 30px 24px; }
+	.footer-strip { letter-spacing: .16em; font-size: .82rem; }
+	.mobile-nav { padding-top: 100px; }
+	.hero { padding: 44px 0 40px; }
+}
