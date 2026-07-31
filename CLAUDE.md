@@ -18,7 +18,8 @@ attuale `https://www.cisac.it`.
 ├── js/main.js          – Hamburger, contatori, reveal scroll, form mailto, anno footer
 ├── images/
 │   ├── logo-cisac.png  – Logo ufficiale (Centro Italiano Servizi AntiCorrosione + APCE/CEOCOR/RINA)
-│   ├── favicon.svg
+│   ├── favicon-16.png / favicon-32.png / favicon-192.png / favicon-512.png
+│   ├── apple-touch-icon.png
 │   ├── avatar.png      – Avatar generico scaricato dal sito Wix (attualmente non usato: si usano le iniziali)
 │   └── referenze/      – 21 loghi clienti (a2a, snam, italgas, enel, hera, iren, …)
 └── docs/
@@ -73,6 +74,17 @@ testo "Anticorrosione strutture interrate". Presente su tutte le pagine sopra il
 ### Squadra
 Card con avatar a **iniziali** (non foto: il sito Wix usa un placeholder generico).
 `.member.lead` = avatar giallo, usato per il CEO.
+
+### Favicon
+Ricavata dal simbolo del logo (sagoma Italia + tubo diagonale), non dal logo intero:
+a 16px il logo completo diventa illeggibile. La sagoma è stata **riempita** partendo
+dal contorno del PNG (flood fill + chiusura morfologica), perché nell'originale
+è solo un profilo sottile che sparisce in miniatura.
+Colori: fondo navy, Italia bianca, tubo **giallo** — nel logo il tubo è rosso, ma
+rosso su navy non ha contrasto sufficiente a 16px. Sorgenti in
+`images/favicon-*.png`, `apple-touch-icon.png` e `favicon.ico` (16/32/48).
+Titoli pagina: iniziano tutti con `CISAC – ` così il brand resta visibile nella
+scheda del browser, che tronca dopo ~15 caratteri.
 
 ### Form contatti
 Sito statico → il form compone un link `mailto:info@cisac.it` via JS (sezione 4 di `main.js`).
