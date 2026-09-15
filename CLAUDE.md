@@ -8,8 +8,8 @@ attuale `https://www.cisac.it`.
 ```
 /
 ├── index.html          – Home (hero, chi siamo, servizi, mission/vision, certificazioni, referenze)
-├── squadra.html        – La nostra squadra (14 persone, certificazioni CICPND)
-├── referenze.html      – Griglia 21 loghi clienti
+├── squadra.html        – La nostra squadra (12 persone, certificazioni CICPND)
+├── referenze.html      – Griglia 26 loghi clienti
 ├── contatti.html       – Recapiti, form mailto, mappa Google
 ├── sitemap.xml
 ├── robots.txt
@@ -21,16 +21,16 @@ attuale `https://www.cisac.it`.
 │   ├── favicon-16.png / favicon-32.png / favicon-192.png / favicon-512.png
 │   ├── apple-touch-icon.png
 │   ├── avatar.png      – Avatar generico scaricato dal sito Wix (attualmente non usato: si usano le iniziali)
-│   └── referenze/      – 21 loghi clienti (a2a, snam, italgas, enel, hera, iren, …)
+│   └── referenze/      – 26 loghi clienti (a2a, snam-rete-gas, italgas, enel, hera, iren, …)
 └── docs/
-    └── politica-aziendale.pdf   – PDF scaricato dal sito Wix
+    └── politica-aziendale.pdf   – Politica Aziendale firmata (San Paolo d’Argon, 31/05/2024)
 ```
 
 ## Dati azienda
 
 - **Ragione sociale**: CISAC Protezione Catodica srl
 - **Sede**: via Volta 16/A – 24060 San Paolo d'Argon (BG)
-- **Tel**: 035-583244 · **Fax**: 035-0292973
+- **Tel**: 035-583244  _(il fax è stato dismesso: rimosso dal sito il 15/09/2026)_
 - **Email**: info@cisac.it · **PEC**: cisacsrl@ticertifica.it
 - **P.IVA**: 02887600167
 - **LinkedIn**: https://www.linkedin.com/company/24655449
@@ -90,6 +90,13 @@ scheda del browser, che tronca dopo ~15 caratteri.
 Sito statico → il form compone un link `mailto:info@cisac.it` via JS (sezione 4 di `main.js`).
 Nessun servizio esterno coinvolto.
 
+### Politica aziendale (PDF)
+Linkata dal menu di tutte le pagine (`docs/politica-aziendale.pdf`). Il file è quello
+fornito da Fausto il 15/09/2026, che **annulla e sostituisce** la versione precedente
+presa dal sito Wix. Documento firmato dalla Direzione, San Paolo d’Argon 31/05/2024
+(piè di pagina: Rev. 0 del 15/07/2021). Sostituendolo, mantenere lo stesso nome file:
+i 14 link nelle pagine puntano tutti lì.
+
 ## Pubblicazione su GitHub Pages
 
 1. Creare il repo (es. `albo94/cisac`) e caricare il contenuto di `sito-cisac/` nella **root**.
@@ -110,8 +117,12 @@ Nessun servizio esterno coinvolto.
 
 ## Da completare / verificare con il cliente
 
-- Email di Mattia Orsini, Andrea Colotti, Michele Piccinini: sono state ipotizzate seguendo lo
+- Email di Andrea Colotti e Michele Piccinini: sono state ipotizzate seguendo lo
   schema `nome.cognome.cisac@gmail.com`. **Da confermare.**
-- Nicola Orsini: certificazione impostata a Liv. 3 Sett. T (sostituisce la Liv. 1 precedente).
 - Le 6 card "servizi" sono una riformulazione della frase unica del sito Wix: da validare.
+- **Loghi delle 9 referenze aggiunte il 15/09/2026**: scaricati dai siti ufficiali delle
+  aziende, non forniti dal cliente. Da far validare prima del dominio definitivo.
+- **Retipiù**: il logo ufficiale ha la parola "reti" in bianco (pensato per header scuri) e
+  su fondo chiaro sparirebbe. È stato ricolorato nel grigio `#9c9b9b` già presente nel
+  simbolo "+" del marchio. **Chiedere a Fausto il file ufficiale per fondi chiari.**
 - Foto reali dei tecnici e foto di cantiere, se disponibili, al posto delle iniziali.
