@@ -75,27 +75,59 @@
 	els.forEach(function (el) { io.observe(el); });
 })();
 
-/* --- 4. FORM CONTATTI (mailto, sito statico) ---------------- */
+/* --- 4. FORM CONTATTI (invio diretto, sito statico) ---------- */
+/*  Il modulo viene inviato via fetch() al servizio indicato qui sotto,
+    che recapita il messaggio a info@cisac.it. Nessun client di posta
+    viene aperto sul computer di chi scrive.
+    Per cambiare servizio (es. Web3Forms) basta sostituire ENDPOINT
+    e, se serve, aggiungere i campi nascosti richiesti in contatti.html. */
 (function () {
+	var ENDPOINT = 'https://formsubmit.co/ajax/info@cisac.it';
+
 	var form = document.getElementById('contact-form');
 	if (!form) return;
 
+	var btn = document.getElementById('form-submit');
+	var status = document.getElementById('form-status');
+	var btnLabel = btn ? btn.textContent : '';
+
+	function show(kind, text) {
+		if (!status) return;
+		status.className = 'form-status ' + kind;
+		status.textContent = text;
+		status.hidden = false;
+	}
+
 	form.addEventListener('submit', function (e) {
 		e.preventDefault();
-		var nome = form.nome.value.trim();
-		var email = form.email.value.trim();
-		var tel = form.telefono.value.trim();
-		var msg = form.messaggio.value.trim();
 
-		var body =
-			'Nome: ' + nome + '\n' +
-			'Email: ' + email + '\n' +
-			'Telefono: ' + tel + '\n\n' +
-			msg;
+		if (!form.checkValidity()) { form.reportValidity(); return; }
+		/* trappola antispam: se è piena, fingiamo il successo e non inviamo nulla */
+		if (form._honey && form._honey.value) { show('ok', 'Richiesta inviata.'); return; }
 
-		window.location.href = 'mailto:info@cisac.it' +
-			'?subject=' + encodeURIComponent('Richiesta dal sito – ' + nome) +
-			'&body=' + encodeURIComponent(body);
+		var data = new FormData(form);
+		data.set('_subject', 'Richiesta informazioni dal sito – ' + form.nome.value.trim());
+
+		if (btn) { btn.disabled = true; btn.textContent = 'Invio in corso…'; }
+		show('pending', 'Invio in corso…');
+
+		fetch(ENDPOINT, {
+			method: 'POST',
+			headers: { 'Accept': 'application/json' },
+			body: data
+		})
+			.then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, body: j }; }); })
+			.then(function (res) {
+				if (!res.ok) throw new Error('HTTP error');
+				form.reset();
+				show('ok', 'Richiesta inviata, grazie. Ti rispondiamo al più presto.');
+			})
+			.catch(function () {
+				show('error', 'Invio non riuscito. Riprova più tardi oppure scrivici a info@cisac.it o chiama lo 035-583244.');
+			})
+			.then(function () {
+				if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+			});
 	});
 })();
 

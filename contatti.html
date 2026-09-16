@@ -168,28 +168,41 @@
 				<h2>Richiedi informazioni</h2>
 			</div>
 
-			<form class="contact-form" id="contact-form">
+			<form class="contact-form" id="contact-form" action="https://formsubmit.co/info@cisac.it" method="POST">
+				<!-- Campi di servizio del gestore del modulo (FormSubmit) -->
+				<input type="hidden" name="_subject" value="Richiesta informazioni dal sito cisac.it">
+				<input type="hidden" name="_template" value="table">
+				<input type="hidden" name="_captcha" value="false">
+				<!-- Trappola antispam: i bot la compilano, le persone non la vedono -->
+				<input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
 				<div class="field">
 					<label for="nome">Nome e cognome *</label>
-					<input type="text" id="nome" name="nome" required>
+					<input type="text" id="nome" name="nome" autocomplete="name" required>
 				</div>
 				<div class="field">
 					<label for="email">Email *</label>
-					<input type="email" id="email" name="email" required>
+					<input type="email" id="email" name="email" autocomplete="email" required>
 				</div>
 				<div class="field">
 					<label for="telefono">Telefono</label>
-					<input type="tel" id="telefono" name="telefono">
+					<input type="tel" id="telefono" name="telefono" autocomplete="tel">
 				</div>
 				<div class="field">
 					<label for="messaggio">Messaggio *</label>
 					<textarea id="messaggio" name="messaggio" required></textarea>
 				</div>
-				<div>
-					<button type="submit" class="btn btn-yellow">Invia richiesta</button>
+				<div class="field-consent">
+					<input type="checkbox" id="privacy" name="privacy" value="acconsento" required>
+					<label for="privacy">Ho letto l’<a href="https://www.iubenda.com/privacy-policy/50228978" target="_blank" rel="noopener">informativa sulla privacy</a>
+					e acconsento al trattamento dei dati per ricevere risposta alla mia richiesta. *</label>
 				</div>
-				<p class="form-note">Il pulsante apre il tuo programma di posta con il messaggio già
-				compilato, indirizzato a info@cisac.it.</p>
+				<div>
+					<button type="submit" class="btn btn-yellow" id="form-submit">Invia richiesta</button>
+				</div>
+				<p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
+				<p class="form-note">I campi contrassegnati con * sono obbligatori. La richiesta arriva
+				direttamente a info@cisac.it: ti rispondiamo all’indirizzo che ci indichi.</p>
 			</form>
 		</div>
 	</div>

@@ -619,6 +619,48 @@ section { padding: 96px 0; }
 .field textarea { resize: vertical; min-height: 150px; }
 .form-note { font-size: .86rem; color: var(--text-soft); margin: 0; }
 
+/* trappola antispam: fuori dal flusso e invisibile, ma raggiungibile dai bot */
+.hp-field {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* consenso privacy */
+.field-consent { display: flex; align-items: flex-start; gap: 12px; }
+.field-consent input[type="checkbox"] {
+	flex: 0 0 auto;
+	width: 20px;
+	height: 20px;
+	margin-top: 2px;
+	accent-color: var(--navy);
+	cursor: pointer;
+}
+.field-consent label {
+	font-size: .92rem;
+	line-height: 1.55;
+	color: var(--text-soft);
+	cursor: pointer;
+}
+.field-consent a { color: var(--navy); font-weight: 600; }
+
+/* esito dell’invio */
+.form-status {
+	margin: 0;
+	padding: 14px 18px;
+	border-radius: var(--radius-sm);
+	font-size: .95rem;
+	border-left: 5px solid transparent;
+}
+.form-status.pending { background: var(--gray); border-left-color: var(--line); color: var(--text-soft); }
+.form-status.ok { background: #eef7ee; border-left-color: #3f8f45; color: #27632c; }
+.form-status.error { background: #fdf3e7; border-left-color: var(--yellow-dark); color: #8a5b00; }
+
+.contact-form button[disabled] { opacity: .65; cursor: progress; transform: none; }
+
 /* --- 15. BANNER CTA ----------------------------------------- */
 .cta-banner {
 	text-align: center;
