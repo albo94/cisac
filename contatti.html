@@ -25,21 +25,85 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "CISAC Protezione Catodica srl",
-  "image": "https://www.cisac.it/images/logo-cisac.png",
-  "url": "https://www.cisac.it/contatti.html",
-  "telephone": "+39-035-583244",
-  "email": "info@cisac.it",
-  "vatID": "02887600167",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Via Volta 16/A",
-    "addressLocality": "San Paolo d'Argon",
-    "addressRegion": "BG",
-    "postalCode": "24060",
-    "addressCountry": "IT"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.cisac.it/#sito",
+      "url": "https://www.cisac.it/",
+      "name": "CISAC Protezione Catodica srl",
+      "inLanguage": "it-IT",
+      "publisher": {
+        "@id": "https://www.cisac.it/#organizzazione"
+      }
+    },
+    {
+      "@type": "ContactPage",
+      "@id": "https://www.cisac.it/contatti.html#pagina",
+      "url": "https://www.cisac.it/contatti.html",
+      "name": "CISAC – Contatti | San Paolo d’Argon (BG)",
+      "description": "Contatta CISAC Protezione Catodica srl – via Volta 16/A, 24060 San Paolo d'Argon (BG). Tel. 035-583244, info@cisac.it, PEC cisacsrl@ticertifica.it.",
+      "isPartOf": {
+        "@id": "https://www.cisac.it/#sito"
+      },
+      "about": {
+        "@id": "https://www.cisac.it/#organizzazione"
+      },
+      "inLanguage": "it-IT",
+      "dateModified": "2026-10-16",
+      "breadcrumb": {
+        "@id": "https://www.cisac.it/contatti.html#briciole"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.cisac.it/contatti.html#briciole",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.cisac.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contatti",
+          "item": "https://www.cisac.it/contatti.html"
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.cisac.it/#sede",
+      "parentOrganization": {
+        "@id": "https://www.cisac.it/#organizzazione"
+      },
+      "name": "CISAC Protezione Catodica srl",
+      "image": "https://www.cisac.it/images/logo-cisac.png",
+      "url": "https://www.cisac.it/contatti.html",
+      "telephone": "+39-035-583244",
+      "email": "info@cisac.it",
+      "vatID": "02887600167",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Volta 16/A",
+        "addressLocality": "San Paolo d’Argon",
+        "addressRegion": "BG",
+        "postalCode": "24060",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.68,
+        "longitude": 9.825
+      },
+      "hasMap": "https://g.page/cisac-protezione-catodica-srl",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italia"
+      }
+    }
+  ]
 }
 </script>
 	<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
@@ -93,6 +157,8 @@
 		<a class="social-sq" href="https://www.linkedin.com/company/24655449" target="_blank" rel="noopener" aria-label="LinkedIn CISAC"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M100 448H7V149h93v299zM54 108a54 54 0 1 1 0-108 54 54 0 0 1 0 108zm394 340h-93V302c0-35-1-79-48-79-48 0-56 38-56 77v148h-93V149h89v41h1c13-23 43-48 88-48 94 0 112 62 112 143v163z"/></svg></a>
 	</div>
 </nav>
+
+<main>
 
 <section class="page-hero">
 	<div class="wrap">
@@ -222,6 +288,8 @@
 		</div>
 	</div>
 </section>
+
+</main>
 
 <div class="footer-strip">Anticorrosione strutture interrate</div>
 

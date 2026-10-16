@@ -1,0 +1,46 @@
+# CISAC Protezione Catodica srl
+
+> Azienda specializzata nel settore dell'anticorrosione, con tecnici operanti dal 1966.
+> Progetta, installa e mantiene sistemi catodici anticorrosione per strutture metalliche
+> interrate e impianti elettrici-tecnologici. Sede a San Paolo d'Argon (Bergamo), opera
+> su tutto il territorio italiano.
+
+Denominazione completa: CISAC Protezione Catodica srl (Centro Italiano Servizi AntiCorrosione).
+Partita IVA 02887600167. Squadra di 12 persone, di cui 10 tecnici con certificazione
+individuale CICPND secondo la norma UNI EN ISO 15257.
+
+## Servizi
+
+- **Progettazione** — studio e dimensionamento di sistemi di protezione catodica a corrente impressa e ad anodi galvanici
+- **Installazione** — realizzazione di impianti di protezione catodica, dispersori, posti di misura, alimentatori e collegamenti
+- **Manutenzione** — manutenzione programmata e straordinaria, verifiche periodiche di efficienza e ripristini
+- **Telecontrollo** — riduzione degli interventi di misurazione in loco e reportistica elettronica
+- **Impianti elettrici e tecnologici** — progettazione, installazione e manutenzione a servizio dei sistemi anticorrosione
+- **Misure e diagnostica** — rilievi sulle strutture interrate, analisi dello stato di protezione, reportistica tecnica
+
+## Certificazioni e accreditamenti
+
+- UNI EN ISO 9001 — sistema di gestione per la qualità (RINA / CISQ)
+- UNI EN ISO 14001 — sistema di gestione ambientale (RINA / CISQ)
+- UNI EN ISO 45001 — salute e sicurezza sul lavoro (RINA / CISQ)
+- UNI EN ISO 15257 — certificazione del personale nel campo della protezione catodica, rilasciata dal CICPND, accreditato ACCREDIA
+- Associazioni di settore: APCE (Associazione per la Protezione dalle Corrosioni Elettrolitiche) e CEOCOR
+
+## Pagine
+
+- [Home](https://www.cisac.it/) — chi siamo, servizi, mission e vision, certificazioni
+- [La nostra squadra](https://www.cisac.it/squadra.html) — i 12 componenti con ruolo e certificazioni CICPND
+- [Referenze](https://www.cisac.it/referenze.html) — 25 aziende clienti, fra cui Snam Rete Gas, Italgas, Enel, A2A, Hera, Iren, Unareti, Ascopiave
+- [Contatti](https://www.cisac.it/contatti.html) — recapiti, modulo di richiesta informazioni, mappa
+
+## Documenti
+
+- [Politica aziendale (PDF)](https://www.cisac.it/docs/politica-aziendale.pdf) — mission, vision e impegni su qualità, ambiente e sicurezza
+
+## Contatti
+
+- Sede: via Volta 16/A, 24060 San Paolo d'Argon (BG), Italia
+- Telefono: 035-583244
+- Email: info@cisac.it
+- PEC: cisacsrl@ticertifica.it
+- LinkedIn: https://www.linkedin.com/company/24655449

@@ -36,24 +36,246 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "CISAC Protezione Catodica srl",
-  "url": "https://www.cisac.it/",
-  "logo": "https://www.cisac.it/images/logo-cisac.png",
-  "foundingDate": "1966",
-  "vatID": "02887600167",
-  "description": "Progettazione, installazione e manutenzione di sistemi catodici anticorrosione per strutture metalliche interrate e di impianti elettrici-tecnologici.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Via Volta 16/A",
-    "addressLocality": "San Paolo d'Argon",
-    "addressRegion": "BG",
-    "postalCode": "24060",
-    "addressCountry": "IT"
-  },
-  "telephone": "+39-035-583244",
-  "email": "info@cisac.it",
-  "sameAs": ["https://www.linkedin.com/company/24655449"]
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://www.cisac.it/#organizzazione",
+      "name": "CISAC Protezione Catodica srl",
+      "alternateName": "Centro Italiano Servizi AntiCorrosione",
+      "url": "https://www.cisac.it/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.cisac.it/images/logo-cisac.png"
+      },
+      "image": "https://www.cisac.it/images/logo-cisac.png",
+      "description": "Progettazione, installazione e manutenzione di sistemi catodici anticorrosione per strutture metalliche interrate e di impianti elettrici-tecnologici.",
+      "foundingDate": "1966",
+      "vatID": "02887600167",
+      "taxID": "02887600167",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Volta 16/A",
+        "addressLocality": "San Paolo d’Argon",
+        "addressRegion": "BG",
+        "postalCode": "24060",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.68,
+        "longitude": 9.825
+      },
+      "telephone": "+39-035-583244",
+      "email": "info@cisac.it",
+      "sameAs": [
+        "https://www.linkedin.com/company/24655449"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Italia"
+      },
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": 12
+      },
+      "knowsAbout": [
+        "Protezione catodica",
+        "Anticorrosione di strutture metalliche interrate",
+        "Sistemi a corrente impressa",
+        "Anodi galvanici",
+        "Telecontrollo di impianti di protezione catodica",
+        "Misure e diagnostica su strutture interrate",
+        "Impianti elettrici e tecnologici",
+        "UNI EN ISO 15257"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+39-035-583244",
+          "email": "info@cisac.it",
+          "areaServed": "IT",
+          "availableLanguage": [
+            "it"
+          ]
+        }
+      ],
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "name": "APCE – Associazione per la Protezione dalle Corrosioni Elettrolitiche"
+        },
+        {
+          "@type": "Organization",
+          "name": "CEOCOR"
+        }
+      ],
+      "hasCertification": [
+        {
+          "@type": "Certification",
+          "name": "UNI EN ISO 9001",
+          "issuedBy": {
+            "@type": "Organization",
+            "name": "RINA / CISQ"
+          }
+        },
+        {
+          "@type": "Certification",
+          "name": "UNI EN ISO 14001",
+          "issuedBy": {
+            "@type": "Organization",
+            "name": "RINA / CISQ"
+          }
+        },
+        {
+          "@type": "Certification",
+          "name": "UNI EN ISO 45001",
+          "issuedBy": {
+            "@type": "Organization",
+            "name": "RINA / CISQ"
+          }
+        },
+        {
+          "@type": "Certification",
+          "name": "UNI EN ISO 15257",
+          "issuedBy": {
+            "@type": "Organization",
+            "name": "CICPND, accreditato ACCREDIA nel settore Protezione Catodica"
+          }
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servizi CISAC Protezione Catodica",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Progettazione",
+              "description": "Studio e dimensionamento di sistemi di protezione catodica a corrente impressa e ad anodi galvanici, con rilievi preliminari e verifiche di interferenza.",
+              "serviceType": "Progettazione",
+              "provider": {
+                "@id": "https://www.cisac.it/#organizzazione"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Italia"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Installazione",
+              "description": "Realizzazione di impianti di protezione catodica, dispersori, posti di misura, alimentatori e collegamenti su strutture metalliche interrate.",
+              "serviceType": "Installazione",
+              "provider": {
+                "@id": "https://www.cisac.it/#organizzazione"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Italia"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Manutenzione",
+              "description": "Manutenzione programmata e straordinaria degli impianti, verifiche periodiche di efficienza e ripristino delle condizioni di protezione.",
+              "serviceType": "Manutenzione",
+              "provider": {
+                "@id": "https://www.cisac.it/#organizzazione"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Italia"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Telecontrollo",
+              "description": "Implementazione del telecontrollo per ridurre gli interventi di misurazione in loco e aumentare la reportistica elettronica.",
+              "serviceType": "Telecontrollo",
+              "provider": {
+                "@id": "https://www.cisac.it/#organizzazione"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Italia"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Impianti elettrici e tecnologici",
+              "description": "Progettazione, installazione e manutenzione di impianti elettrici e tecnologici a servizio dei sistemi anticorrosione.",
+              "serviceType": "Impianti elettrici e tecnologici",
+              "provider": {
+                "@id": "https://www.cisac.it/#organizzazione"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Italia"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Misure e diagnostica",
+              "description": "Rilievi e misure sulle strutture interrate, analisi dello stato di protezione e reportistica tecnica a supporto del cliente.",
+              "serviceType": "Misure e diagnostica",
+              "provider": {
+                "@id": "https://www.cisac.it/#organizzazione"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Italia"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.cisac.it/#sito",
+      "url": "https://www.cisac.it/",
+      "name": "CISAC Protezione Catodica srl",
+      "inLanguage": "it-IT",
+      "publisher": {
+        "@id": "https://www.cisac.it/#organizzazione"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.cisac.it/#pagina",
+      "url": "https://www.cisac.it/",
+      "name": "CISAC – Protezione Catodica | Anticorrosione strutture interrate",
+      "description": "CISAC Protezione Catodica srl: progettazione, installazione e manutenzione di sistemi catodici anticorrosione per strutture metalliche interrate e impianti elettrici-tecnologici. Tecnici operanti dal 1966.",
+      "isPartOf": {
+        "@id": "https://www.cisac.it/#sito"
+      },
+      "about": {
+        "@id": "https://www.cisac.it/#organizzazione"
+      },
+      "inLanguage": "it-IT",
+      "dateModified": "2026-10-16"
+    }
+  ]
 }
 </script>
 	<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
@@ -108,6 +330,8 @@
 		<a class="social-sq" href="https://www.linkedin.com/company/24655449" target="_blank" rel="noopener" aria-label="LinkedIn CISAC"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M100 448H7V149h93v299zM54 108a54 54 0 1 1 0-108 54 54 0 0 1 0 108zm394 340h-93V302c0-35-1-79-48-79-48 0-56 38-56 77v148h-93V149h89v41h1c13-23 43-48 88-48 94 0 112 62 112 143v163z"/></svg></a>
 	</div>
 </nav>
+
+<main>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -375,6 +599,8 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+</main>
+
 <div class="footer-strip">Anticorrosione strutture interrate</div>
 
 <footer class="site-footer">

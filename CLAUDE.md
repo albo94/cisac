@@ -11,8 +11,9 @@ attuale `https://www.cisac.it`.
 ├── squadra.html        – La nostra squadra (12 persone, certificazioni CICPND)
 ├── referenze.html      – Griglia 25 loghi clienti
 ├── contatti.html       – Recapiti, form di contatto, mappa Google
-├── sitemap.xml
-├── robots.txt
+├── sitemap.xml         – con lastmod; include anche il PDF della politica
+├── robots.txt          – consente esplicitamente i crawler dei motori generativi
+├── llms.txt            – sintesi strutturata del sito per gli assistenti AI
 ├── .nojekyll           – necessario per GitHub Pages (evita il build Jekyll)
 ├── css/style.css       – Unico foglio di stile
 ├── js/main.js          – Hamburger, contatori, reveal scroll, invio form, anno footer
@@ -86,6 +87,62 @@ rosso su navy non ha contrasto sufficiente a 16px. Sorgenti in
 Titoli pagina: iniziano tutti con `CISAC – ` così il brand resta visibile nella
 scheda del browser, che tronca dopo ~15 caratteri.
 
+### Dati strutturati e GEO (ottimizzazione per i motori generativi)
+
+Intervento del 16/10/2026. Nessun testo visibile è stato aggiunto: solo metadati,
+semantica e file tecnici.
+
+**JSON-LD** – ogni pagina ha un unico blocco `<script type="application/ld+json">`
+con un `@graph`. I nodi condivisi hanno `@id` stabili e le pagine li referenziano
+invece di duplicarli:
+
+| `@id` | Nodo |
+|---|---|
+| `https://www.cisac.it/#organizzazione` | `Organization` + `ProfessionalService` |
+| `https://www.cisac.it/#sito` | `WebSite` |
+| `https://www.cisac.it/#sede` | `LocalBusiness` (solo in contatti.html) |
+
+Per pagina: `WebPage` (home), `AboutPage` (squadra), `CollectionPage` (referenze),
+`ContactPage` (contatti), più `BreadcrumbList` sulle tre pagine interne.
+Il nodo organizzazione porta `knowsAbout`, `hasCertification` (le 4 norme ISO),
+`memberOf` (APCE, CEOCOR), `contactPoint`, `areaServed`, `numberOfEmployees` e
+`hasOfferCatalog` con i 6 servizi. `squadra.html` espone un `ItemList` di 12 `Person`
+con `hasCredential` per ogni certificazione CICPND; `referenze.html` un `ItemList`
+dei 25 clienti.
+
+**Gli schemi sono generati dal contenuto visibile, non scritti a mano.** Lo script
+sta in `_strumenti/geo_build.py` (fuori dal repo pubblicato): rilegge servizi, squadra
+e referenze dalle pagine e riscrive i blocchi JSON-LD. Dopo aver modificato uno di quei
+tre elenchi, rilanciarlo invece di correggere il JSON a mano:
+
+```
+python -I _strumenti/geo_build.py sito-cisac
+python -I _strumenti/geo_check.py sito-cisac
+```
+
+`geo_check.py` verifica che il JSON sia valido, che i tag siano bilanciati e che il
+sitemap sia ben formato.
+
+**`<main>`** – aggiunto su tutte e 4 le pagine, avvolge il contenuto fra la navigazione
+mobile e la banda gialla. Serve a far capire ai crawler dove finisce il contenuto e
+dove cominciano header e footer ripetuti. Il CSS non usa selettori figlio-diretto,
+quindi il wrapper non tocca il layout.
+
+**`robots.txt`** – oltre a `User-agent: *` elenca esplicitamente GPTBot, OAI-SearchBot,
+ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, meta-externalagent,
+Amazonbot e CCBot, tutti in `Allow`. È una scelta: consente anche l'uso dei contenuti
+per l'addestramento dei modelli. Per escluderne uno basta cambiare `Allow` in `Disallow`
+nel blocco corrispondente.
+
+**`llms.txt`** – convenzione emergente (come robots.txt, ma per gli assistenti AI):
+sintesi dell'azienda, servizi, certificazioni, elenco pagine e contatti in markdown.
+Tutti i dati vengono dalle pagine esistenti, niente di inventato. **Va aggiornato a mano**
+se cambiano servizi, certificazioni o recapiti.
+
+**`dateModified` / `lastmod`** – fissati al 16/10/2026 nel JSON-LD e nel `sitemap.xml`.
+Sono date dichiarate, non automatiche: vanno aggiornate a ogni modifica sostanziale dei
+contenuti.
+
 ### Form contatti
 Il form **invia direttamente** la richiesta, senza aprire il client di posta di chi scrive
 (il vecchio `mailto:` è stato eliminato il 15/09/2026: apriva la finestra "Scegli un'app"
@@ -115,6 +172,9 @@ campo hidden `access_key`; in quel caso cambiare `ENDPOINT` in
 
 > **Privacy**: il passaggio da mailto a un servizio esterno introduce un responsabile del
 > trattamento. L'informativa iubenda va aggiornata indicando il fornitore del modulo.
+
+**Attivazione completata**: la mail di conferma FormSubmit è stata cliccata, il modulo
+recapita regolarmente a info@cisac.it (verificato il 16/10/2026).
 
 ### Politica aziendale (PDF)
 Linkata dal menu di tutte le pagine (`docs/politica-aziendale.pdf`). Sostituendolo, mantenere
@@ -179,13 +239,18 @@ I glifi duplicati si vedono solo così: a schermo la parola sembra corretta.
 
 ## Da completare / verificare con il cliente
 
+- **Contenuti per i motori generativi**: l’audit GEO del 16/10/2026 ha rilevato pagine
+  magre — contando solo il `<main>`: referenze 54 parole, contatti 93, squadra 240,
+  home 853. Mancano inoltre una spiegazione di *che cos’è* la protezione catodica e una
+  FAQ: sono le due leve più efficaci perché il sito venga citato come fonte dalle AI.
+  Interventi rimandati su richiesta del cliente: richiedono testi tecnici da far validare
+  a Massimo o Fausto.
+
 - Email di Andrea Colotti e Michele Piccinini: sono state ipotizzate seguendo lo
   schema `nome.cognome.cisac@gmail.com`. **Da confermare.**
 - Le 6 card "servizi" sono una riformulazione della frase unica del sito Wix: da validare.
 - **Loghi delle 9 referenze aggiunte il 15/09/2026**: scaricati dai siti ufficiali delle
   aziende, non forniti dal cliente. Da far validare prima del dominio definitivo.
-- **Form contatti**: va fatto l’invio di prova che attiva FormSubmit (vedi sopra), altrimenti
-  le richieste dal sito non arrivano a nessuno.
 - **Retipiù**: il logo ufficiale ha la parola "reti" in bianco (pensato per header scuri) e
   su fondo chiaro sparirebbe. È stato ricolorato nel grigio `#9c9b9b` già presente nel
   simbolo "+" del marchio. **Chiedere a Fausto il file ufficiale per fondi chiari.**
