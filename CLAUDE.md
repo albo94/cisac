@@ -34,7 +34,9 @@ attuale `https://www.cisac.it`.
 - **Tel**: 035-583244  _(il fax è stato dismesso: rimosso dal sito il 15/09/2026)_
 - **Email**: info@cisac.it · **PEC**: cisacsrl@ticertifica.it
 - **P.IVA**: 02887600167
-- **LinkedIn**: https://www.linkedin.com/company/24655449
+- **LinkedIn**: https://www.linkedin.com/company/24655449 — **non più linkato dal sito**
+  (pulsanti e scheda "Social" rimossi il 16/10/2026 su richiesta del cliente); resta solo
+  nel `sameAs` del JSON-LD, vedi sezione "Dati strutturati e GEO"
 - **Privacy**: iubenda https://www.iubenda.com/privacy-policy/50228978
 - **Tecnici operanti dal**: 1966
 - **Certificazioni**: UNI EN ISO 9001, 14001, 45001 (RINA/CISQ), UNI EN ISO 15257 (CICPND/ACCREDIA)
@@ -63,7 +65,10 @@ attuale `https://www.cisac.it`.
 ### Header (fascia navy sticky)
 Due righe, come l'originale:
 - riga 1: brand `CISAC Protezione Catodica srl` + pill "Sede: …"
-- riga 2: nav + pill telefono/email + quadrato LinkedIn giallo
+- riga 2: nav + pill telefono/email
+
+Il quadrato giallo LinkedIn (`.social-sq`) è stato tolto il 16/10/2026 da header, menu
+mobile e footer, insieme al suo CSS e al contenitore `.footer-social` rimasto vuoto.
 
 La voce di menu attiva ha sfondo giallo e **freccetta triangolare** sotto
 (`.main-nav a.current::after`). Sotto i 1150px il menu diventa hamburger + overlay navy.
@@ -122,6 +127,12 @@ python -I _strumenti/geo_check.py sito-cisac
 
 `geo_check.py` verifica che il JSON sia valido, che i tag siano bilanciati e che il
 sitemap sia ben formato.
+
+**`sameAs` LinkedIn** – il nodo organizzazione dichiara ancora la pagina aziendale LinkedIn
+in `sameAs`, anche dopo la rimozione dei pulsanti dal sito. È invisibile ai visitatori e
+serve ai motori a collegare l’azienda al suo profilo. Se il cliente non vuole che compaia
+nemmeno lì, va tolto da `_strumenti/geo_build.py` (riga `"sameAs"`) e poi rilanciato lo
+script: correggere solo `index.html` non basta, la prossima rigenerazione lo rimetterebbe.
 
 **`<main>`** – aggiunto su tutte e 4 le pagine, avvolge il contenuto fra la navigazione
 mobile e la banda gialla. Serve a far capire ai crawler dove finisce il contenuto e
@@ -221,13 +232,42 @@ I glifi duplicati si vedono solo così: a schermo la parola sembra corretta.
 
 ## Pubblicazione su GitHub Pages
 
-1. Creare il repo (es. `albo94/cisac`) e caricare il contenuto di `sito-cisac/` nella **root**.
-2. Settings → Pages → Source: branch `main`, cartella `/ (root)`.
-3. Per il dominio `www.cisac.it`: aggiungere un file `CNAME` con dentro `www.cisac.it`,
-   poi sul DNS del dominio impostare
-   - A record → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - CNAME `www` → `<utente>.github.io`
-4. Attivare "Enforce HTTPS" dopo la propagazione DNS.
+Repo `albo94/cisac`, Settings → Pages → Source: branch `main`, cartella `/ (root)`.
+Ogni push su `main` va online in circa un minuto.
+
+**Dominio `www.cisac.it` — attivo dal 17/10/2026.** Agganciato dal file `CNAME` nella root
+del repo (una riga: `www.cisac.it`). **Non cancellarlo e non rinominarlo**: senza quel file
+GitHub non sa quale repository servire per il dominio e `www.cisac.it` torna a dare 404
+("There isn't a GitHub Pages site here"), che è esattamente quello che succedeva prima.
+
+DNS (pannello `dns.chkz.net`, utente `cisac`, gestito da Fabrizio Frosali):
+
+| Record | Valore | Note |
+|---|---|---|
+| `cisac.it` A | `185.199.108.153`, `.109`, `.110`, `.111` | IP di GitHub Pages |
+| `www.cisac.it` CNAME | `cisac.it` | GitHub consiglia invece `albo94.github.io` (vedi sotto) |
+| `cisac.it` MX | `ASPMX.L.GOOGLE.COM` + 4 alternativi | posta di info@cisac.it: **non toccare** |
+
+HTTPS: GitHub emette da solo il certificato Let’s Encrypt dopo l’aggancio del dominio
+(di solito entro un’ora). Quando c’è, va spuntato **Settings → Pages → Enforce HTTPS**,
+altrimenti il sito resta raggiungibile anche in `http://` e il browser mostra "Non sicuro".
+
+Verifiche del 17/10/2026, subito dopo l’aggancio:
+- nessun record **CAA** sul dominio, quindi Let’s Encrypt può emettere il certificato. Se in
+  futuro qualcuno aggiunge un CAA, deve includere `letsencrypt.org` o HTTPS smette di rinnovarsi;
+- appena agganciato, GitHub presenta il proprio certificato `*.github.io` finché non arriva
+  quello per `cisac.it`: è in quella finestra che Chrome mostra "Questo sito non supporta una
+  connessione sicura". Non è un errore di configurazione;
+- un 404 su `http://cisac.it` subito dopo l’aggancio può essere la cache di GitHub
+  (`X-Cache: HIT`, intestazione `Age`): è il 404 di prima, che scade da solo in qualche minuto.
+
+Facoltativi, chiesti a Fabrizio il 17/10/2026 (il sito funziona anche senza):
+- `www` in CNAME su `albo94.github.io` invece che su `cisac.it`, come raccomanda GitHub;
+- 4 record **AAAA** per IPv6: `2606:50c0:8000::153`, `2606:50c0:8001::153`,
+  `2606:50c0:8002::153`, `2606:50c0:8003::153`;
+- record **TXT** di verifica del dominio (`_github-pages-challenge-albo94`), che impedisce a
+  un altro account GitHub di agganciare `cisac.it`. Il valore va generato prima da GitHub:
+  Settings dell’account `albo94` → Pages → Add a domain.
 
 ## Regole di sviluppo
 

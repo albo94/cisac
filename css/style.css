@@ -139,16 +139,6 @@ strong { font-weight: 600; color: #4a4949; }
 }
 .header-contacts { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
 
-.social-sq {
-	width: 36px; height: 36px;
-	background: var(--yellow);
-	border-radius: 50%;
-	display: flex; align-items: center; justify-content: center;
-	flex: none;
-	transition: background .22s var(--ease), transform .22s var(--ease);
-}
-.social-sq svg { width: 17px; height: 17px; fill: var(--navy); }
-.social-sq:hover { background: var(--white); transform: translateY(-2px) scale(1.06); }
 
 /* --- 4. NAVIGAZIONE ----------------------------------------- */
 .main-nav ul {
@@ -700,7 +690,6 @@ section { padding: 96px 0; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { padding: 4px 0; }
 .footer-logo { background: var(--white); border-radius: var(--radius-sm); padding: 16px; max-width: 250px; margin-bottom: 20px; }
-.footer-social { display: flex; gap: 10px; margin-top: 16px; }
 .footer-bottom {
 	margin-top: 42px;
 	border-top: 1px solid rgba(255,255,255,.16);
