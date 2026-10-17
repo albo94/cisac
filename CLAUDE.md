@@ -15,6 +15,9 @@ attuale `https://www.cisac.it`.
 ├── robots.txt          – consente esplicitamente i crawler dei motori generativi
 ├── llms.txt            – sintesi strutturata del sito per gli assistenti AI
 ├── .nojekyll           – necessario per GitHub Pages (evita il build Jekyll)
+├── CNAME               – dominio `www.cisac.it`: **non toccare** (vedi "Pubblicazione")
+├── 404.html            – pagina d’errore con grafica del sito (percorsi **assoluti**, vedi sotto)
+├── team.html           – redirect dal vecchio URL Wix `/team` a `squadra.html`
 ├── css/style.css       – Unico foglio di stile
 ├── js/main.js          – Hamburger, contatori, reveal scroll, invio form, anno footer
 ├── images/
@@ -269,19 +272,49 @@ un CNAME verso `<utente>.github.io`. Quindi non emette il certificato e "Enforce
 grigio. Dopo la modifica, se il controllo non riparte da solo: Settings → Pages → Remove sul
 dominio, reinserire `www.cisac.it` e Save.
 
-Facoltativi, chiesti nello stesso messaggio:
-- 4 record **AAAA** per IPv6: `2606:50c0:8000::153`, `2606:50c0:8001::153`,
-  `2606:50c0:8002::153`, `2606:50c0:8003::153`;
-- record **TXT** di verifica del dominio (`_github-pages-challenge-albo94`), che impedisce a
-  un altro account GitHub di agganciare `cisac.it`. Il valore va generato prima da GitHub:
-  Settings dell’account `albo94` → Pages → Add a domain.
+Riferimento: il sito dell’ambulanza (`albo94/ambulanzaselvinoaviatico`, stessa impostazione)
+ha `www` in CNAME su `albo94.github.io` e HTTPS funzionante, senza record AAAA né TXT di
+verifica GitHub. Quelli restano miglioramenti facoltativi, non chiesti:
+- 4 record **AAAA** per IPv6: `2606:50c0:8000::153` … `2606:50c0:8003::153`;
+- TXT `_github-pages-challenge-albo94` (impedisce a un altro account GitHub di agganciare il
+  dominio): il valore si genera in Settings dell’account `albo94` → Pages → Add a domain.
+
+**I due TXT `google-site-verification` già presenti sul dominio non vanno toccati**, e chi
+aggiunge un TXT sull’host `@` deve *aggiungere*, non sostituire: lì c’è anche l’SPF della
+posta (`v=spf1 include:_spf.google.com ~all`). Sono la verifica di una proprietà Search
+Console già esistente: se spariscono, la proprietà decade e si perde lo storico.
+
+### Vecchi indirizzi del sito Wix
+
+Ricavati dall’archivio Wayback Machine il 17/10/2026. GitHub Pages non fa redirect lato
+server, ma risolve da solo gli URL senza `.html`:
+
+| URL Wix | Ora |
+|---|---|
+| `/` | home |
+| `/contatti` | `contatti.html` (risolto da GitHub Pages) |
+| `/referenze` | `referenze.html` (risolto da GitHub Pages) |
+| `/team` | `team.html` → redirect immediato a `squadra.html` |
+| `/gesa` | 404: era una pagina Wix vuota (solo menu e footer), niente da recuperare |
+
+`team.html` usa `meta refresh` a 0 secondi + `canonical` + `location.replace`: Google lo
+tratta come spostamento definitivo. Ha `noindex` e non va in `sitemap.xml`.
+
+**`404.html`** – GitHub la serve per qualunque indirizzo inesistente, **a qualsiasi
+profondità** (`/gesa`, `/team/`, `/a/b/c`): per questo tutti i suoi percorsi sono assoluti
+(`/css/style.css`, `/index.html`…). Con percorsi relativi, su `/a/b/c` perderebbe CSS e
+immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
+`404.html` e `team.html` sono escluse da `_strumenti/geo_check.py` (insieme `SERVIZIO`).
 
 ## Regole di sviluppo
 
 - Solo vanilla HTML/CSS/JS, nessun framework (come per il sito Ambulanza).
 - Il giallo `#ffd600` è il segno distintivo: usarlo per accenti, banda e tab attiva. **Niente rosso.**
 - Il corpo del sito deve restare prevalentemente **bianco**.
-- Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutti e 4 i file.
+- Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutti e 4 i file
+  **e in `404.html`**, dove i percorsi vanno scritti assoluti (`/index.html`, non `index.html`).
+- Questo file è **pubblico** (`www.cisac.it/CLAUDE.md`, repo pubblico): niente credenziali,
+  accessi a pannelli o note riservate. Quelle vanno nel `CLAUDE.md` della cartella di lavoro.
 - Anteprima locale: `python -m http.server 8123 --directory sito-cisac`
 
 ## Da completare / verificare con il cliente
