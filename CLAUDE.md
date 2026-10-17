@@ -11,6 +11,7 @@ attuale `https://www.cisac.it`.
 ├── squadra.html        – La nostra squadra (12 persone, certificazioni CICPND)
 ├── referenze.html      – Griglia 25 loghi clienti
 ├── contatti.html       – Recapiti, form di contatto, mappa Google
+├── politica.html       – Politica aziendale come pagina del sito (dal 17/10/2026, prima era solo PDF)
 ├── sitemap.xml         – con lastmod; include anche il PDF della politica
 ├── robots.txt          – consente esplicitamente i crawler dei motori generativi
 ├── llms.txt            – sintesi strutturata del sito per gli assistenti AI
@@ -27,7 +28,8 @@ attuale `https://www.cisac.it`.
 │   ├── avatar.png      – Avatar generico scaricato dal sito Wix (attualmente non usato: si usano le iniziali)
 │   └── referenze/      – 25 loghi clienti (a2a, snam-rete-gas, italgas, enel, hera, iren, …)
 └── docs/
-    └── politica-aziendale.pdf   – Politica Aziendale firmata (San Paolo d’Argon, 31/05/2024)
+    └── politica-aziendale.pdf   – Politica Aziendale firmata (San Paolo d’Argon, 31/05/2024),
+                                   scaricabile da fondo `politica.html`; non più nel menu
 ```
 
 ## Dati azienda
@@ -111,7 +113,11 @@ invece di duplicarli:
 | `https://www.cisac.it/#sede` | `LocalBusiness` (solo in contatti.html) |
 
 Per pagina: `WebPage` (home), `AboutPage` (squadra), `CollectionPage` (referenze),
-`ContactPage` (contatti), più `BreadcrumbList` sulle tre pagine interne.
+`ContactPage` (contatti), `WebPage` (politica), più `BreadcrumbList` sulle pagine interne.
+`dateModified` è per pagina (parametro `data` di `pagina()` in `geo_build.py`) e va spostato
+solo quando cambia il **contenuto**, non per un ritocco al menu: il 17/10/2026 sono passate
+al 17/10 solo home (refuso corretto, link) e politica (nuova); le altre restano al 16/10
+anche se hanno cambiato la voce di menu. Stesso criterio per `lastmod` in `sitemap.xml`.
 Il nodo organizzazione porta `knowsAbout`, `hasCertification` (le 4 norme ISO),
 `memberOf` (APCE, CEOCOR), `contactPoint`, `areaServed`, `numberOfEmployees` e
 `hasOfferCatalog` con i 6 servizi. `squadra.html` espone un `ItemList` di 12 `Person`
@@ -137,7 +143,7 @@ serve ai motori a collegare l’azienda al suo profilo. Se il cliente non vuole 
 nemmeno lì, va tolto da `_strumenti/geo_build.py` (riga `"sameAs"`) e poi rilanciato lo
 script: correggere solo `index.html` non basta, la prossima rigenerazione lo rimetterebbe.
 
-**`<main>`** – aggiunto su tutte e 4 le pagine, avvolge il contenuto fra la navigazione
+**`<main>`** – aggiunto su tutte le pagine (4 all’inizio, poi `politica.html`), avvolge il contenuto fra la navigazione
 mobile e la banda gialla. Serve a far capire ai crawler dove finisce il contenuto e
 dove cominciano header e footer ripetuti. Il CSS non usa selettori figlio-diretto,
 quindi il wrapper non tocca il layout.
@@ -190,9 +196,37 @@ campo hidden `access_key`; in quel caso cambiare `ENDPOINT` in
 **Attivazione completata**: la mail di conferma FormSubmit è stata cliccata, il modulo
 recapita regolarmente a info@cisac.it (verificato il 16/10/2026).
 
-### Politica aziendale (PDF)
-Linkata dal menu di tutte le pagine (`docs/politica-aziendale.pdf`). Sostituendolo, mantenere
-lo stesso nome file: i 14 link nelle pagine puntano tutti lì.
+### Politica aziendale
+
+**Dal 17/10/2026 è una pagina del sito, `politica.html`**, al posto del PDF che si apriva in
+una nuova scheda e faceva uscire dal sito. Menu (desktop, mobile, footer) di tutte le pagine e
+i due link nel testo della home puntano lì; in sitemap e `llms.txt` la pagina ha preso il posto
+del PDF. Il PDF firmato resta in `docs/` ed è scaricabile da un link in fondo alla pagina
+(attributo `download`: si salva, non si apre al posto del sito). Sostituendo il PDF, mantenere
+lo stesso nome file.
+
+Il testo della pagina è quello del PDF firmato, con **ritocchi leggeri di forma** chiesti dal
+cliente (“lo stesso testo o leggermente sistemato”). Nessun cambio di contenuto:
+- titoli in minuscolo e l’elenco dei valori come etichette (come nella home);
+- “sensibilizzandoli” → “sensibilizzandole” (riferito a “persone”); “sulle attività, i rischi
+  aziendali e problematiche” → “sulle attività, sui rischi aziendali e sulle problematiche”;
+- “la gestione dei Rischi Aziendali intesi come strumento” → “la gestione dei rischi aziendali
+  come strumento”;
+- “della propria ed altrui” → “della propria e altrui”, e più in generale “ed”/“ad” davanti
+  a consonante o vocale diversa → “e”/“a” (“a essere”, “a ogni livello”, “e al contesto”);
+- “L’obiettivo interno è quello di creare un ordine, una pulizia, eliminare gli sprechi in termini
+  sia di spazio…” → “L’obiettivo interno è creare ordine e pulizia ed eliminare gli sprechi in
+  termini di spazio…”;
+- virgole aggiunte dove la frase le richiedeva (“Non solo ci prefiggiamo tali requisiti, ma…”,
+  “telecontrollo, diminuendo…”, “stabilendo obiettivi…”).
+Se la Direzione rivede la politica, la pagina va riallineata al nuovo PDF a mano.
+
+⚠️ **La sezione Mission & Vision della home NON è la stessa politica.** Viene dal vecchio sito
+Wix ed è una versione diversa, più lunga, che nel PDF firmato del 31/05/2024 non c’è (obblighi
+di conformità, partecipazione e consultazione dei lavoratori, analisi dei quasi infortuni,
+coinvolgimento dei clienti). Il 17/10/2026 è stato corretto solo il refuso “in primo sulle
+persone”. **Da chiarire con Fausto quale delle due è la versione in vigore** e poi allineare
+l’altra: oggi il sito mostra due testi diversi della stessa politica.
 
 **Versione pubblicata: quella corretta da Fausto il 16/09/2026**
 (`Politica rev.correzioni ortografiche.pdf`), che annulla e sostituisce sia il file Wix sia
@@ -315,7 +349,8 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
 - Solo vanilla HTML/CSS/JS, nessun framework (come per il sito Ambulanza).
 - Il giallo `#ffd600` è il segno distintivo: usarlo per accenti, banda e tab attiva. **Niente rosso.**
 - Il corpo del sito deve restare prevalentemente **bianco**.
-- Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutti e 4 i file
+- Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutte e 5 le
+  pagine (index, squadra, politica, referenze, contatti)
   **e in `404.html`**, dove i percorsi vanno scritti assoluti (`/index.html`, non `index.html`).
 - Questo file è **pubblico** (`www.cisac.it/CLAUDE.md`, repo pubblico): niente credenziali,
   accessi a pannelli o note riservate. Quelle vanno nel `CLAUDE.md` della cartella di lavoro.

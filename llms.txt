@@ -35,7 +35,7 @@ individuale CICPND secondo la norma UNI EN ISO 15257.
 
 ## Documenti
 
-- [Politica aziendale (PDF)](https://www.cisac.it/docs/politica-aziendale.pdf) — mission, vision e impegni su qualità, ambiente e sicurezza
+- [Politica aziendale](https://www.cisac.it/politica.html) — mission, vision e impegni su qualità, ambiente e sicurezza (UNI EN ISO 9001, 14001, 45001); in fondo alla pagina la versione firmata in PDF
 
 ## Contatti
 
