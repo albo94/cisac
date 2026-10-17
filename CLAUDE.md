@@ -240,12 +240,13 @@ del repo (una riga: `www.cisac.it`). **Non cancellarlo e non rinominarlo**: senz
 GitHub non sa quale repository servire per il dominio e `www.cisac.it` torna a dare 404
 ("There isn't a GitHub Pages site here"), che è esattamente quello che succedeva prima.
 
-DNS (pannello `dns.chkz.net`, utente `cisac`, gestito da Fabrizio Frosali):
+DNS gestito dal fornitore del dominio (contatti e accesso al pannello nel `CLAUDE.md` della
+cartella di lavoro, **non** qui: questo file è pubblicato insieme al sito):
 
 | Record | Valore | Note |
 |---|---|---|
 | `cisac.it` A | `185.199.108.153`, `.109`, `.110`, `.111` | IP di GitHub Pages |
-| `www.cisac.it` CNAME | `cisac.it` | GitHub consiglia invece `albo94.github.io` (vedi sotto) |
+| `www.cisac.it` CNAME | `cisac.it` → **da cambiare in `albo94.github.io`** | necessario per HTTPS (vedi sotto) |
 | `cisac.it` MX | `ASPMX.L.GOOGLE.COM` + 4 alternativi | posta di info@cisac.it: **non toccare** |
 
 HTTPS: GitHub emette da solo il certificato Let’s Encrypt dopo l’aggancio del dominio
@@ -261,8 +262,14 @@ Verifiche del 17/10/2026, subito dopo l’aggancio:
 - un 404 su `http://cisac.it` subito dopo l’aggancio può essere la cache di GitHub
   (`X-Cache: HIT`, intestazione `Age`): è il 404 di prima, che scade da solo in qualche minuto.
 
-Facoltativi, chiesti a Fabrizio il 17/10/2026 (il sito funziona anche senza):
-- `www` in CNAME su `albo94.github.io` invece che su `cisac.it`, come raccomanda GitHub;
+**Necessario per HTTPS** (richiesto al gestore DNS il 17/10/2026): `www` in CNAME su
+`albo94.github.io`. Con il CNAME su `cisac.it` il sito risponde lo stesso, ma il controllo DNS
+di GitHub considera `www.cisac.it` "not properly configured": per un sottodominio accetta solo
+un CNAME verso `<utente>.github.io`. Quindi non emette il certificato e "Enforce HTTPS" resta
+grigio. Dopo la modifica, se il controllo non riparte da solo: Settings → Pages → Remove sul
+dominio, reinserire `www.cisac.it` e Save.
+
+Facoltativi, chiesti nello stesso messaggio:
 - 4 record **AAAA** per IPv6: `2606:50c0:8000::153`, `2606:50c0:8001::153`,
   `2606:50c0:8002::153`, `2606:50c0:8003::153`;
 - record **TXT** di verifica del dominio (`_github-pages-challenge-albo94`), che impedisce a
