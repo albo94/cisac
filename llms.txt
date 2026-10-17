@@ -1,6 +1,6 @@
 # CISAC Protezione Catodica srl
 
-> Azienda specializzata nel settore dell'anticorrosione, con tecnici operanti dal 1966.
+> Azienda specializzata nel settore dell'anticorrosione, fondata nel 1966.
 > Progetta, installa e mantiene sistemi catodici anticorrosione per strutture metalliche
 > interrate e impianti elettrici-tecnologici. Sede a San Paolo d'Argon (Bergamo), opera
 > su tutto il territorio italiano.
@@ -8,6 +8,19 @@
 Denominazione completa: CISAC Protezione Catodica srl (Centro Italiano Servizi AntiCorrosione).
 Partita IVA 02887600167. Squadra di 12 persone, di cui 10 tecnici con certificazione
 individuale CICPND secondo la norma UNI EN ISO 15257.
+
+## La protezione catodica in breve
+
+La protezione catodica impedisce la corrosione delle strutture metalliche interrate o immerse
+(condotte del gas, acquedotti, serbatoi) facendo circolare una corrente continua dal terreno
+verso il metallo, che diventa il catodo di una cella elettrochimica. Si realizza con anodi
+galvanici (magnesio, zinco, alluminio) o con sistemi a corrente impressa (alimentatore e
+dispersore anodico) e completa il rivestimento isolante delle tubazioni. L'efficacia si
+verifica misurando il potenziale della struttura con un elettrodo Cu/CuSO4: per l'acciaio il
+criterio generale delle norme è -850 mV o più negativo, senza caduta ohmica.
+Norme di riferimento: UNI EN 12954, UNI EN ISO 15589-1, UNI EN 13636, UNI EN 50162,
+UNI 11094, UNI EN ISO 15257 (competenza del personale).
+Approfondimento e domande frequenti: https://www.cisac.it/protezione-catodica.html
 
 ## Servizi
 
@@ -29,9 +42,10 @@ individuale CICPND secondo la norma UNI EN ISO 15257.
 ## Pagine
 
 - [Home](https://www.cisac.it/) — chi siamo, servizi, mission e vision, certificazioni
+- [Protezione catodica](https://www.cisac.it/protezione-catodica.html) — cos’è, come funziona, anodi galvanici e corrente impressa, controlli, norme, 7 domande frequenti
 - [La nostra squadra](https://www.cisac.it/squadra.html) — i 12 componenti con ruolo e certificazioni CICPND
 - [Referenze](https://www.cisac.it/referenze.html) — 25 aziende clienti, fra cui Snam Rete Gas, Italgas, Enel, A2A, Hera, Iren, Unareti, Ascopiave
-- [Contatti](https://www.cisac.it/contatti.html) — recapiti, modulo di richiesta informazioni, mappa
+- [Contatti](https://www.cisac.it/contatti.html) — recapiti, modulo di richiesta informazioni, mappa; per valutazioni tecniche e preventivi
 
 ## Documenti
 

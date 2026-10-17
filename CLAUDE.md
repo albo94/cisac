@@ -12,6 +12,7 @@ attuale `https://www.cisac.it`.
 ├── referenze.html      – Griglia 25 loghi clienti
 ├── contatti.html       – Recapiti, form di contatto, mappa Google
 ├── politica.html       – Politica aziendale come pagina del sito (dal 17/10/2026, prima era solo PDF)
+├── protezione-catodica.html – guida: cos’è, come funziona, sistemi, controlli, norme, 7 FAQ (17/10/2026)
 ├── sitemap.xml         – con lastmod; include anche il PDF della politica
 ├── robots.txt          – consente esplicitamente i crawler dei motori generativi
 ├── llms.txt            – sintesi strutturata del sito per gli assistenti AI
@@ -22,7 +23,9 @@ attuale `https://www.cisac.it`.
 ├── css/style.css       – Unico foglio di stile
 ├── js/main.js          – Hamburger, contatori, reveal scroll, invio form, anno footer
 ├── images/
-│   ├── logo-cisac.png  – Logo ufficiale (Centro Italiano Servizi AntiCorrosione + APCE/CEOCOR/RINA)
+│   ├── logo-cisac.png  – Logo ufficiale (Centro Italiano Servizi AntiCorrosione + APCE/CEOCOR/RINA),
+│   │                     880×608, palette 256 colori: 45 KB (era 1066×736, 292 KB)
+│   ├── og-cisac.jpg    – immagine per le anteprime social 1200×630 (og:image di tutte le pagine)
 │   ├── favicon-16.png / favicon-32.png / favicon-192.png / favicon-512.png
 │   ├── apple-touch-icon.png
 │   ├── avatar.png      – Avatar generico scaricato dal sito Wix (attualmente non usato: si usano le iniziali)
@@ -43,7 +46,9 @@ attuale `https://www.cisac.it`.
   (pulsanti e scheda "Social" rimossi il 16/10/2026 su richiesta del cliente); resta solo
   nel `sameAs` del JSON-LD, vedi sezione "Dati strutturati e GEO"
 - **Privacy**: iubenda https://www.iubenda.com/privacy-policy/50228978
-- **Tecnici operanti dal**: 1966
+- **Fondata nel**: 1966 (confermato dal cliente il 17/10/2026). Nelle pagine compare anche
+  «tecnici operanti dal 1966»: è la stessa data, non una data diversa. Nel JSON-LD
+  `foundingDate: 1966` è corretto.
 - **Certificazioni**: UNI EN ISO 9001, 14001, 45001 (RINA/CISQ), UNI EN ISO 15257 (CICPND/ACCREDIA)
 - **Associazioni**: APCE, CEOCOR
 
@@ -184,6 +189,50 @@ se cambiano servizi, certificazioni o recapiti.
 **`dateModified` / `lastmod`** – fissati al 16/10/2026 nel JSON-LD e nel `sitemap.xml`.
 Sono date dichiarate, non automatiche: vanno aggiornate a ogni modifica sostanziale dei
 contenuti.
+
+### Revisione SEO/GEO del 17/10/2026
+
+**Pagina `protezione-catodica.html`** – la leva GEO principale rimasta fuori il 16/10. Struttura
+pensata per essere citata: la definizione completa sta nel primo paragrafo
+(`.lead-answer`), poi indice, sezioni con `id` (link diretti), tabella anodi galvanici /
+corrente impressa, norme, «Cosa fa CISAC» e **7 FAQ** in `<details>` nativi (testo nell’HTML
+anche da chiusi). Non è nel menu principale: con una sesta voce il menu non sta più accanto
+al blocco contatti sotto i ~1300px. È linkata da footer e menu mobile di tutte le pagine,
+dalla sezione servizi della home e dal testo di Referenze.
+
+**Dati strutturati della pagina** (generati da `geo_build.py`): `WebPage`, `BreadcrumbList`,
+`TechArticle` e `FAQPage`. Le FAQ sono lette dal markup fra `<!-- FAQ:INIZIO -->` e
+`<!-- FAQ:FINE -->`: per aggiungere o cambiare una domanda si modifica la pagina e si
+rilancia lo script, mai il JSON. L’articolo e `knowsAbout` dell’organizzazione puntano
+all’entità **Wikidata Q15152527** («protezione catodica», con le voci Wikipedia it/en in
+`sameAs`): lega il tema del sito a un concetto che i motori conoscono già.
+
+**Correzioni ai dati esistenti**
+- coordinate della sede: erano 45.680, 9.825, circa **2,7 km a est** di via Volta; ora
+  45.682, 9.790 (OpenStreetMap) nel JSON-LD e nei meta `geo.position`/`ICBM` della home;
+- il link `g.page/cisac-protezione-catodica-srl` **non porta più alla scheda Google** (rimanda a
+  una ricerca testuale): sostituito ovunque, pulsante «Sede» del header e scheda di Contatti,
+  con una ricerca Google Maps per nome e indirizzo; nel JSON-LD `hasMap` usa lo stesso link;
+- `geo_build.py` estraeva i clienti con una regex che voleva `alt` subito dopo `src`: con
+  `width`/`height` in mezzo l’`ItemList` di Referenze era diventato **vuoto**. Ora la regex è
+  indipendente dall’ordine degli attributi (controllare a fine run: `clienti=25`).
+
+**Meta tag** – su tutte le 6 pagine indicizzabili lo stesso blocco Open Graph completo
+(`og:url`, `og:site_name`, `og:image` 1200×630 con dimensioni e `alt`) e `twitter:card`;
+prima `og:url` e Twitter c’erano solo in home. Descrizioni tutte sotto i 160 caratteri (la
+home ne aveva 205). Titoli di Referenze e Contatti con parole chiave («Clienti nel gas e
+nell’energia», «Protezione catodica a San Paolo d’Argon»).
+
+**Immagini** – tutte le `<img>` hanno `width`/`height` reali e nel CSS `img { height: auto }`:
+gli attributi riservano solo lo spazio mentre l’immagine carica (niente salti di layout).
+Verificato con confronto pixel prima/dopo: nessuna differenza sulle pagine statiche. Ha
+anche corretto un difetto: su telefono il logo della home era **deformato**, perché aveva
+`width`/`height` sbagliati (1066×722) e nessun `height: auto`. Loghi clienti ridotti a
+440px sul lato lungo e PNG in palette a 256 colori dove l’errore medio è sotto 2/255
+(Gruppo Tea escluso): cartella `images` da 1.044 a circa 400 KB.
+
+**Testi** – Referenze e Contatti avevano 54 e 91 parole: aggiunti un paragrafo con i clienti
+per settore (solo nomi già in pagina) e uno su per cosa contattare CISAC e l’area servita.
 
 ### Form contatti
 Il form **invia direttamente** la richiesta, senza aprire il client di posta di chi scrive
@@ -387,8 +436,8 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
 - Solo vanilla HTML/CSS/JS, nessun framework (come per il sito Ambulanza).
 - Il giallo `#ffd600` è il segno distintivo: usarlo per accenti, banda e tab attiva. **Niente rosso.**
 - Il corpo del sito deve restare prevalentemente **bianco**.
-- Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutte e 5 le
-  pagine (index, squadra, politica, referenze, contatti)
+- Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutte e 6 le
+  pagine (index, protezione-catodica, squadra, politica, referenze, contatti)
   **e in `404.html`**, dove i percorsi vanno scritti assoluti (`/index.html`, non `index.html`).
 - Questo file è **pubblico** (`www.cisac.it/CLAUDE.md`, repo pubblico): niente credenziali,
   accessi a pannelli o note riservate. Quelle vanno nel `CLAUDE.md` della cartella di lavoro.
@@ -403,12 +452,21 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
 
 ## Da completare / verificare con il cliente
 
-- **Contenuti per i motori generativi**: l’audit GEO del 16/10/2026 ha rilevato pagine
-  magre — contando solo il `<main>`: referenze 54 parole, contatti 93, squadra 240,
-  home 853. Mancano inoltre una spiegazione di *che cos’è* la protezione catodica e una
-  FAQ: sono le due leve più efficaci perché il sito venga citato come fonte dalle AI.
-  Interventi rimandati su richiesta del cliente: richiedono testi tecnici da far validare
-  a Massimo o Fausto.
+- **Far rileggere a Fausto o Massimo `protezione-catodica.html`** (pubblicata il 17/10/2026).
+  Contiene solo nozioni tecniche consolidate, ma sono affermazioni a nome dell’azienda. Punti
+  da confermare in particolare: il criterio di **−850 mV** Cu/CuSO4 «senza caduta ohmica»
+  con valori più severi nei terreni anaerobici; l’elenco delle **norme** (UNI EN 12954, UNI EN
+  ISO 15589-1, UNI EN 13636, UNI EN 50162, UNI 11094, UNI EN ISO 15257); la frase su **ARERA**
+  (requisiti e controlli sulla protezione catodica delle reti gas in acciaio, scritta senza
+  numeri né delibere); l’elenco dei servizi e i clienti per settore in Referenze (Pizio e
+  S.A.L.P. come imprese di costruzione). Se cambiano le FAQ: modificare la pagina e
+  rilanciare `geo_build.py`.
+- **Azioni che richiedono gli account del cliente** (non fattibili da qui):
+  Google Search Console (proprietà di dominio già verificata dai due TXT
+  `google-site-verification`: inviare `https://www.cisac.it/sitemap.xml` e rimuovere la
+  sitemap del vecchio sito Wix), **Bing Webmaster Tools** (importabile da Search Console; Bing
+  alimenta anche la ricerca di ChatGPT e Copilot), e la **scheda Google dell’azienda**
+  (Google Business Profile: indirizzo, sito `https://www.cisac.it`, categoria, foto).
 
 - Email di Andrea Colotti e Michele Piccinini: sono state ipotizzate seguendo lo
   schema `nome.cognome.cisac@gmail.com`. **Da confermare.**
