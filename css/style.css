@@ -139,6 +139,26 @@ strong { font-weight: 600; color: #4a4949; }
 }
 .header-contacts { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; }
 
+/* Desktop: header su griglia 2×2. Colonna sinistra brand + menu, colonna destra le tre
+   pillole come un unico blocco: sede sopra, telefono ed email sotto, stessi bordi.
+   Prima stavano in due righe flex indipendenti e i bordi sinistri risultavano sfalsati
+   (sede 341px, telefono+email 290px) e quasi attaccati in verticale. */
+@media (min-width: 1151px) {
+	.site-header > .wrap {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		column-gap: 32px;
+		row-gap: 6px;
+		padding-top: 12px;
+	}
+	.header-top, .header-bottom { display: contents; }
+	.header-top .brand { grid-column: 1; grid-row: 1; align-self: center; }
+	.header-top > .pill { grid-column: 2; grid-row: 1; justify-self: stretch; justify-content: center; }
+	.main-nav { grid-column: 1; grid-row: 2; align-self: end; }
+	.header-contacts { grid-column: 2; grid-row: 2; align-self: center; padding-bottom: 0; gap: 10px; }
+	.header-contacts .pill { flex: 1; justify-content: center; }
+}
+
 
 /* --- 4. NAVIGAZIONE ----------------------------------------- */
 .main-nav ul {
@@ -286,6 +306,9 @@ strong { font-weight: 600; color: #4a4949; }
 
 /* hero pagine interne */
 .page-hero { background: var(--white); padding: 56px 0 10px; }
+/* la prima sezione dopo l’intro non riparte con i 96px pieni: sommati al titolo
+   lasciavano un vuoto di 110-170px fra introduzione e contenuto */
+.page-hero + section { padding-top: 48px; }
 .page-hero h1 { margin-bottom: .3em; }
 .page-hero h1::after {
 	content: "";
@@ -321,7 +344,7 @@ section { padding: 96px 0; }
 .sec-head p { margin-bottom: 0; }
 
 /* --- 8. INTRO / FATTI --------------------------------------- */
-.intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: start; }
 .intro-grid .lead { font-size: 1.16rem; color: #4a4949; }
 
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -397,7 +420,9 @@ section { padding: 96px 0; }
 .card p { margin: 0; font-size: .98rem; }
 
 /* --- 10. MISSION / VISION ----------------------------------- */
-.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+/* align-items: start: la vision è molto più corta della mission e, stirata, restava
+   con ~560px di bianco vuoto */
+.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; }
 .mv {
 	position: relative;
 	background: var(--white);
@@ -494,7 +519,14 @@ section { padding: 96px 0; }
 .cert p { margin: 0; font-size: .93rem; }
 
 /* --- 12. REFERENZE ------------------------------------------ */
-.logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 18px; }
+/* flex e non grid: con 25 loghi l’ultima riga incompleta (3 colonne → 1 logo, 2 → 1)
+   resta centrata invece che appesa a sinistra. Colonne: 5 / 3 / 2. */
+.logo-grid { --cols: 5; --gap: 18px; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--gap); }
+.logo-grid > .logo-cell { flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)); }
+/* anteprima in home: 8 loghi → 4 per riga (2 su telefono), righe sempre piene */
+.logo-grid.preview { --cols: 4; }
+@media (max-width: 900px) { .logo-grid { --cols: 3; } .logo-grid.preview { --cols: 4; } }
+@media (max-width: 620px) { .logo-grid, .logo-grid.preview { --cols: 2; --gap: 12px; } }
 .logo-cell {
 	background: var(--white);
 	border-radius: var(--radius-sm);
@@ -568,7 +600,9 @@ section { padding: 96px 0; }
 }
 .member .certs { list-style: none; margin: 0 0 16px; padding: 0; font-size: .87rem; flex: 1; }
 .member .certs li { padding: 3px 0; }
-.member .contacts { border-top: 1px solid var(--line); padding-top: 14px; font-size: .87rem; }
+/* min-height = due righe (telefono + email): con una riga sola la linea divisoria
+   finiva più in basso che nelle schede vicine */
+.member .contacts { border-top: 1px solid var(--line); padding-top: 14px; font-size: .87rem; min-height: calc(15px + 3.3em); }
 .member .contacts a { display: block; word-break: break-word; }
 
 /* --- 14. CONTATTI ------------------------------------------- */
@@ -759,8 +793,18 @@ section { padding: 96px 0; }
 	.hero { padding: 52px 0 46px; }
 	.hero-logo { padding: 22px; border-radius: var(--radius); }
 	.card, .mv, .member { padding: 28px 24px; }
-	.cards, .cert-grid, .facts, .footer-grid { grid-template-columns: 1fr; }
-	.logo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+	.cards, .cert-grid, .footer-grid { grid-template-columns: 1fr; }
 	.footer-strip { letter-spacing: .16em; font-size: .82rem; }
 	.mobile-nav { padding-top: 100px; }
+	/* etichetta della hero su una riga sola (con .22em andava a capo dentro la pillola) */
+	.hero .eyebrow { letter-spacing: .1em; font-size: .7rem; padding: 7px 14px; }
+	/* pulsanti impilati: stessa larghezza invece di due lunghezze diverse */
+	.hero-actions .btn, .cta-actions .btn { flex: 1 1 100%; text-align: center; }
+	.cta-actions { max-width: 360px; margin: 0 auto; }
+	/* i tre numeri restano affiancati: impilati occupavano tre righe quasi vuote */
+	.facts { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+	.fact { padding: 20px 6px; }
+	.fact .num { font-size: 1.55rem; }
+	.fact .lbl { font-size: .62rem; letter-spacing: .06em; }
+	.page-hero + section { padding-top: 36px; }
 }

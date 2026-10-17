@@ -72,6 +72,14 @@ Due righe, come l'originale:
 - riga 1: brand `CISAC Protezione Catodica srl` + pill "Sede: …"
 - riga 2: nav + pill telefono/email
 
+**Sopra i 1150px il header è una griglia 2×2** (`.site-header > .wrap`, con `.header-top` e
+`.header-bottom` in `display: contents`): a sinistra brand e menu, a destra le tre pill come
+**un unico blocco** con gli stessi bordi — sede sopra, telefono ed email sotto, metà larghezza
+ciascuna. Prima erano due righe flex indipendenti: la pill della sede (341px) era più larga
+di telefono+email (290px), i bordi sinistri risultavano sfalsati a scaletta e fra le due
+righe c’erano 3px. Verificato da 1151 a 1920px: bordi identici, 12px fra le righe, menu e
+pill non si toccano. Sotto i 1150px l’HTML è lo stesso ma vale il layout flex del mobile.
+
 Il quadrato giallo LinkedIn (`.social-sq`) è stato tolto il 16/10/2026 da header, menu
 mobile e footer, insieme al suo CSS e al contenitore `.footer-social` rimasto vuoto.
 
@@ -85,6 +93,20 @@ testo "Anticorrosione strutture interrate". Presente su tutte le pagine sopra il
 ### Squadra
 Card con avatar a **iniziali** (non foto: il sito Wix usa un placeholder generico).
 `.member.lead` = avatar giallo, usato per il CEO.
+`.member .contacts` ha `min-height` pari a **due righe** (telefono + email): così la linea
+divisoria sta alla stessa altezza in tutte le card di una riga anche quando solo una ha il
+telefono. Se una card ne avrà tre, alzare il `min-height`.
+
+### Griglie dei loghi
+`.logo-grid` è **flex**, non grid: con 25 loghi l’ultima riga incompleta resta centrata.
+Colonne con la variabile `--cols`: 5 sopra i 900px, 3 fino a 620px, 2 sotto.
+`.logo-grid.preview` (solo home, 8 loghi) usa 4 colonne, 2 su telefono: righe sempre piene.
+Se in home si cambia il numero di loghi, sceglierlo multiplo di 4.
+
+I file in `images/referenze/` vanno **ritagliati sul marchio**: il riquadro si adatta
+all’immagine intera, quindi un logo con molto margine bianco dentro il file appare minuscolo.
+Il 17/10/2026 sono stati ritagliati a2a (il marchio occupava il 31% del file), Cazzaro (34%),
+Iren (37%), Centria (38%), SGI (50%), Aset (65%) e Snam (70%), lasciando un bordo del 3%.
 
 ### Favicon
 Ricavata dal simbolo del logo (sagoma Italia + tubo diagonale), non dal logo intero:
@@ -371,6 +393,13 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
 - Questo file è **pubblico** (`www.cisac.it/CLAUDE.md`, repo pubblico): niente credenziali,
   accessi a pannelli o note riservate. Quelle vanno nel `CLAUDE.md` della cartella di lavoro.
 - Anteprima locale: `python -m http.server 8123 --directory sito-cisac`
+- **Verifica grafica dopo ogni modifica al layout**, su più larghezze (1440, 1280, 1024, 768
+  e telefono 390): `_strumenti/cattura_desktop.py` e `_strumenti/cattura_mobile.py` (fuori dal
+  repo) fanno screenshot a pagina intera con il server locale acceso. ⚠️ Chrome headless non
+  impagina sotto i **512px**: una cattura "a 390" fatta direttamente è in realtà a 512 ritagliata
+  e sembra che tutto esca dal bordo destro. Per il mobile va usato `cattura_mobile.py`, che
+  carica la pagina in un iframe largo 390px. Svuotare la cartella `chrome-profile` dentro la
+  cartella di output dopo aver cambiato il CSS, o Chrome usa quello in cache.
 
 ## Da completare / verificare con il cliente
 
