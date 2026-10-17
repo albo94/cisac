@@ -286,9 +286,25 @@ cartella di lavoro, **non** qui: questo file è pubblicato insieme al sito):
 | `www.cisac.it` CNAME | `albo94.github.io` | dal 17/10/2026; necessario per HTTPS (vedi sotto) |
 | `cisac.it` MX | `ASPMX.L.GOOGLE.COM` + 4 alternativi | posta di info@cisac.it: **non toccare** |
 
-HTTPS: GitHub emette da solo il certificato Let’s Encrypt dopo l’aggancio del dominio
-(di solito entro un’ora). Quando c’è, va spuntato **Settings → Pages → Enforce HTTPS**,
-altrimenti il sito resta raggiungibile anche in `http://` e il browser mostra "Non sicuro".
+**HTTPS attivo dal 17/10/2026, ore 14:20 circa.** Certificato Let’s Encrypt per `cisac.it` e
+`www.cisac.it`, valido fino al 15/01/2027: lo rinnova GitHub da solo ogni 90 giorni, non c’è
+niente da fare a mano. Va spuntato **Settings → Pages → Enforce HTTPS**, altrimenti il sito
+resta raggiungibile anche in `http://` senza essere rimandato a `https://`.
+
+Come è andata, per la prossima volta (ci sono volute circa 5 ore dal cambio del DNS):
+1. 08:55 aggancio del dominio con il file `CNAME`. GitHub risponde ma serve il proprio
+   certificato `*.github.io`: Chrome dice "Questo sito non supporta una connessione sicura".
+2. Enforce HTTPS grigio con "*not properly configured to support HTTPS*": era il CNAME di `www`
+   puntato su `cisac.it` invece che su `albo94.github.io`. Cambiato alle 09:35.
+3. Il vecchio CNAME aveva TTL 86400: i resolver pubblici (Google compreso) l’hanno servito fino
+   alle 14 circa, anche se il controllo DNS di GitHub era già verde. Nei registri pubblici dei
+   certificati (crt.sh) nessuna richiesta nuova: GitHub non aveva nemmeno chiesto il certificato.
+4. Dopo le 14, **Remove e Save del dominio** in Settings → Pages: il messaggio è diventato
+   "*a certificate has not yet been issued*" (cioè: richiesta partita) e il certificato è
+   arrivato in pochi minuti.
+In breve: dopo una modifica DNS, aspettare che scada il TTL del record **vecchio** e solo
+allora fare Remove e Save. Remove e Save fanno committare a GitHub "Delete CNAME" e
+"Create CNAME" su `main`: fare `git pull` prima del push successivo.
 
 Verifiche del 17/10/2026, subito dopo l’aggancio:
 - nessun record **CAA** sul dominio, quindi Let’s Encrypt può emettere il certificato. Se in
