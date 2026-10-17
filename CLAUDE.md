@@ -231,6 +231,13 @@ anche corretto un difetto: su telefono il logo della home era **deformato**, per
 440px sul lato lungo e PNG in palette a 256 colori dove l’errore medio è sotto 2/255
 (Gruppo Tea escluso): cartella `images` da 1.044 a circa 400 KB.
 
+**IndexNow** – il file `e383bb55f1c4e28f4115d9fe20f4b71b.txt` nella radice è la chiave con cui
+il sito avvisa Bing, Yandex, Seznam e Naver delle pagine nuove o cambiate (Bing alimenta anche
+la ricerca di ChatGPT e Copilot). **Non cancellarlo**: sembra un file di scarto ma senza le
+notifiche vengono rifiutate. Prima notifica il 17/10/2026, 6 URL, risposta 202 (accettato).
+Dopo una modifica importante, a pubblicazione avvenuta: `python -I _strumenti/indexnow.py`
+(tutta la sitemap) oppure con i nomi delle pagine cambiate.
+
 **Testi** – Referenze e Contatti avevano 54 e 91 parole: aggiunti un paragrafo con i clienti
 per settore (solo nomi già in pagina) e uno su per cosa contattare CISAC e l’area servita.
 
