@@ -20,6 +20,8 @@ attuale `https://www.cisac.it`.
 ├── CNAME               – dominio `www.cisac.it`: **non toccare** (vedi "Pubblicazione")
 ├── 404.html            – pagina d’errore con grafica del sito (percorsi **assoluti**, vedi sotto)
 ├── team.html           – redirect dal vecchio URL Wix `/team` a `squadra.html`
+├── google6decf7dafd64fc80.html – verifica Google Search Console (proprietà prefisso URL): **non cancellare**
+├── e383bb55f1c4e28f4115d9fe20f4b71b.txt – chiave IndexNow (Bing & co.): **non cancellare**
 ├── css/style.css       – Unico foglio di stile
 ├── js/main.js          – Hamburger, contatori, reveal scroll, invio form, anno footer
 ├── images/
@@ -230,6 +232,13 @@ anche corretto un difetto: su telefono il logo della home era **deformato**, per
 `width`/`height` sbagliati (1066×722) e nessun `height: auto`. Loghi clienti ridotti a
 440px sul lato lungo e PNG in palette a 256 colori dove l’errore medio è sotto 2/255
 (Gruppo Tea escluso): cartella `images` da 1.044 a circa 400 KB.
+
+**Google Search Console** – verificata il 18/10/2026 come proprietà **prefisso URL**
+`https://www.cisac.it/` con il file `google6decf7dafd64fc80.html` nella radice (il pannello DNS
+quel giorno era bloccato, quindi niente TXT). **Il file non va cancellato né rinominato**:
+Google ricontrolla periodicamente e, se sparisce, la proprietà torna non verificata.
+Facoltativo più avanti: aggiungere anche la proprietà di **dominio** con il TXT (copre http,
+https, www e senza www) — con il TXT si *aggiunge* un record, mai si sostituiscono quelli esistenti.
 
 **IndexNow** – il file `e383bb55f1c4e28f4115d9fe20f4b71b.txt` nella radice è la chiave con cui
 il sito avvisa Bing, Yandex, Seznam e Naver delle pagine nuove o cambiate (Bing alimenta anche
