@@ -13,6 +13,12 @@ attuale `https://www.cisac.it`.
 ├── contatti.html       – Recapiti, form di contatto, mappa Google
 ├── politica.html       – Politica aziendale come pagina del sito (dal 17/10/2026, prima era solo PDF)
 ├── protezione-catodica.html – guida: cos’è, come funziona, sistemi, controlli, norme, 7 FAQ (17/10/2026)
+├── progettazione-protezione-catodica.html  ┐
+├── installazione-protezione-catodica.html  │
+├── manutenzione-protezione-catodica.html   │ pagine dei 6 servizi (18/10/2026),
+├── telecontrollo-protezione-catodica.html  │ GENERATE da _strumenti/servizi_build.py:
+├── impianti-elettrici-protezione-catodica.html │ non modificarle a mano
+├── misure-protezione-catodica.html         ┘
 ├── sitemap.xml         – con lastmod; include anche il PDF della politica
 ├── robots.txt          – consente esplicitamente i crawler dei motori generativi
 ├── llms.txt            – sintesi strutturata del sito per gli assistenti AI
@@ -240,6 +246,35 @@ Google ricontrolla periodicamente e, se sparisce, la proprietà torna non verifi
 Facoltativo più avanti: aggiungere anche la proprietà di **dominio** con il TXT (copre http,
 https, www e senza www) — con il TXT si *aggiunge* un record, mai si sostituiscono quelli esistenti.
 
+### Pagine dei singoli servizi (18/10/2026)
+
+Sei pagine, una per ogni card «I nostri servizi» della home, ciascuna costruita su una ricerca
+specifica (es. «manutenzione protezione catodica»), dove la concorrenza è molto più bassa che sul
+termine generico. Struttura: H1 + paragrafo-risposta (`.lead-answer`), 2–3 sezioni, «Altri
+servizi» (link incrociati), 3 FAQ, invito al contatto.
+
+**Si modificano dai testi, non dall’HTML.** I testi stanno in `_strumenti/servizi_testi.py`
+(fuori dal repo); le pagine le scrive `_strumenti/servizi_build.py`, che prende head, header e
+footer da `protezione-catodica.html`. Dopo ogni modifica:
+```
+python -I _strumenti/servizi_build.py sito-cisac
+python -I _strumenti/geo_build.py sito-cisac
+python -I _strumenti/geo_check.py sito-cisac
+```
+Correggere a mano un file `*-protezione-catodica.html` dei servizi è inutile: la prossima
+generazione lo sovrascrive.
+
+**Dati strutturati** (da `geo_build.py`): `WebPage`, `BreadcrumbList` (Home › servizio),
+`Service` con `@id` `<pagina>#servizio` e `FAQPage` letta dal markup fra i marcatori FAQ. Le
+offerte del catalogo nel nodo organizzazione (home) puntano agli stessi `@id` e `url`: la
+corrispondenza card → pagina è il campo `card` di `servizi_testi.py`, e `geo_build.py` si
+ferma con un errore se una card della home non ha la sua pagina.
+
+**Collegamenti**: link «Approfondisci →» in ogni card della home (`.card-link`, in fondo alla
+card), colonna **Servizi** nel footer di tutte le pagine (il footer ora ha 4 colonne), voci
+dell’elenco «Cosa fa CISAC» della guida, `llms.txt` e `sitemap.xml` (12 URL). Non sono nel menu
+principale, per la stessa ragione della guida (spazio nel header).
+
 **IndexNow** – il file `e383bb55f1c4e28f4115d9fe20f4b71b.txt` nella radice è la chiave con cui
 il sito avvisa Bing, Yandex, Seznam e Naver delle pagine nuove o cambiate (Bing alimenta anche
 la ricerca di ChatGPT e Copilot). **Non cancellarlo**: sembra un file di scarto ma senza le
@@ -453,7 +488,8 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
 - Il giallo `#ffd600` è il segno distintivo: usarlo per accenti, banda e tab attiva. **Niente rosso.**
 - Il corpo del sito deve restare prevalentemente **bianco**.
 - Header e footer sono duplicati in ogni pagina: se si modificano, aggiornarli in tutte e 6 le
-  pagine (index, protezione-catodica, squadra, politica, referenze, contatti)
+  pagine (index, protezione-catodica, squadra, politica, referenze, contatti) e poi **rilanciare
+  `_strumenti/servizi_build.py`**, che li copia da protezione-catodica nelle 6 pagine dei servizi
   **e in `404.html`**, dove i percorsi vanno scritti assoluti (`/index.html`, non `index.html`).
 - Questo file è **pubblico** (`www.cisac.it/CLAUDE.md`, repo pubblico): niente credenziali,
   accessi a pannelli o note riservate. Quelle vanno nel `CLAUDE.md` della cartella di lavoro.
@@ -477,6 +513,13 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
   numeri né delibere); l’elenco dei servizi e i clienti per settore in Referenze (Pizio e
   S.A.L.P. come imprese di costruzione). Se cambiano le FAQ: modificare la pagina e
   rilanciare `geo_build.py`.
+- **Far rileggere le 6 pagine dei servizi** (18/10/2026), in `_strumenti/servizi_testi.py`.
+  Sono scritte con nozioni tecniche generali e con quanto già detto sul sito, senza tempi,
+  prezzi né casi specifici. Da confermare in particolare: che CISAC posi dispersori anche
+  **profondi** (Installazione); che il telecontrollo si installi anche su **impianti esistenti**
+  (Telecontrollo); l’elenco di cosa comprendono gli **impianti elettrici** (alimentazioni, quadri,
+  linee, telecontrollo); in Misure, se CISAC esegue anche rilievi dei difetti del rivestimento
+  (es. DCVG, CIPS), che oggi **non** sono citati e varrebbe la pena aggiungere.
 - **Azioni che richiedono gli account del cliente** (non fattibili da qui):
   Google Search Console (proprietà di dominio già verificata dai due TXT
   `google-site-verification`: inviare `https://www.cisac.it/sitemap.xml` e rimuovere la

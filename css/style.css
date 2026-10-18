@@ -423,6 +423,14 @@ section { padding: 96px 0; }
 .card .ico svg { width: 25px; height: 25px; fill: var(--navy); }
 .card h3 { margin-bottom: .45em; }
 .card p { margin: 0; font-size: .98rem; }
+/* link alla pagina del servizio, in fondo alla card */
+.card { display: flex; flex-direction: column; }
+.card-link {
+	margin-top: auto; padding-top: 16px;
+	font-family: 'Raleway', sans-serif; font-weight: 700; font-size: .76rem;
+	letter-spacing: .12em; text-transform: uppercase;
+}
+.card-link::after { content: " \2192"; }
 
 /* --- 10. MISSION / VISION ----------------------------------- */
 /* align-items: start: la vision è molto più corta della mission e, stirata, restava
@@ -812,7 +820,7 @@ section { padding: 96px 0; }
 }
 
 .site-footer { background: var(--navy); color: rgba(255,255,255,.78); padding: 54px 0 0; font-size: .95rem; }
-.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1.2fr; gap: 42px; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr .9fr 1fr 1.2fr; gap: 42px; }
 .site-footer h4 {
 	color: var(--yellow);
 	font-family: 'Raleway', sans-serif;
