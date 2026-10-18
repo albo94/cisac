@@ -18,8 +18,12 @@ galvanici (magnesio, zinco, alluminio) o con sistemi a corrente impressa (alimen
 dispersore anodico) e completa il rivestimento isolante delle tubazioni. L'efficacia si
 verifica misurando il potenziale della struttura con un elettrodo Cu/CuSO4: per l'acciaio il
 criterio generale delle norme è -850 mV o più negativo, senza caduta ohmica.
-Norme di riferimento: UNI EN 12954, UNI EN ISO 15589-1, UNI EN 13636, UNI EN 50162,
-UNI 11094, UNI EN ISO 15257 (competenza del personale).
+Norme di riferimento: UNI EN ISO 15589-1:2017 (condotte sulla terraferma), UNI 11094:2019
+(integrazione nazionale: attuazione, verifiche e controlli), UNI EN 12954 (principi generali; nelle
+reti gas sostituita dalla 15589-1), UNI EN 13636 (serbatoi interrati), UNI EN 13509 (tecniche di
+misura), UNI EN 50162 (correnti vaganti), UNI 10950 (telecontrollo), UNI EN ISO 15257:2017
+(competenza del personale). Per le reti in acciaio di distribuzione del gas: Linee Guida APCE,
+redatte su mandato ARERA.
 Approfondimento e domande frequenti: https://www.cisac.it/protezione-catodica.html
 
 ## Servizi
