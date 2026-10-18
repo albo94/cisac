@@ -504,22 +504,16 @@ immagini. Ha `noindex`, nessun JSON-LD, nessuna voce di menu evidenziata.
 
 ## Da completare / verificare con il cliente
 
-- **Far rileggere a Fausto o Massimo `protezione-catodica.html`** (pubblicata il 17/10/2026).
-  Contiene solo nozioni tecniche consolidate, ma sono affermazioni a nome dell’azienda. Punti
-  da confermare in particolare: il criterio di **−850 mV** Cu/CuSO4 «senza caduta ohmica»
-  con valori più severi nei terreni anaerobici; l’elenco delle **norme** (UNI EN 12954, UNI EN
-  ISO 15589-1, UNI EN 13636, UNI EN 50162, UNI 11094, UNI EN ISO 15257); la frase su **ARERA**
-  (requisiti e controlli sulla protezione catodica delle reti gas in acciaio, scritta senza
-  numeri né delibere); l’elenco dei servizi e i clienti per settore in Referenze (Pizio e
-  S.A.L.P. come imprese di costruzione). Se cambiano le FAQ: modificare la pagina e
-  rilanciare `geo_build.py`.
-- **Far rileggere le 6 pagine dei servizi** (18/10/2026), in `_strumenti/servizi_testi.py`.
-  Sono scritte con nozioni tecniche generali e con quanto già detto sul sito, senza tempi,
-  prezzi né casi specifici. Da confermare in particolare: che CISAC posi dispersori anche
-  **profondi** (Installazione); che il telecontrollo si installi anche su **impianti esistenti**
-  (Telecontrollo); l’elenco di cosa comprendono gli **impianti elettrici** (alimentazioni, quadri,
-  linee, telecontrollo); in Misure, se CISAC esegue anche rilievi dei difetti del rivestimento
-  (es. DCVG, CIPS), che oggi **non** sono citati e varrebbe la pena aggiungere.
+- **Contenuti tecnici: verificati il 18/10/2026, in attesa di conferma di Matteo.** Norme con
+  titoli, anni e ambito controllati su fonti (pagina Normativa APCE, informativa C.P.C. srl
+  13/02/2026, schede EN, ARERA): UNI EN ISO 15589-1:2017, UNI 11094:2019 (integra la 15589-1;
+  la 2004 è superata), UNI EN 12954 (nelle reti gas sostituita dalla 15589-1), UNI EN 13636,
+  UNI EN 13509, UNI EN 50162, UNI 10950, UNI EN ISO 15257:2017, Linee Guida APCE per la
+  distribuzione gas. Tolte dalle pagine tutte le affermazioni su CISAC dedotte e non confermate
+  (dispersori profondi, telecontrollo su impianti esistenti, componenti degli impianti elettrici,
+  relazioni periodiche, documentazione consegnata). Le domande per rimetterle, e le nozioni
+  tecniche generali da confermare, sono nella checklist per Matteo (PDF nella cartella di
+  lavoro). Regola: **sul sito solo fatti verificati o confermati dall’azienda**.
 - **Azioni che richiedono gli account del cliente** (non fattibili da qui):
   Google Search Console (proprietà di dominio già verificata dai due TXT
   `google-site-verification`: inviare `https://www.cisac.it/sitemap.xml` e rimuovere la
