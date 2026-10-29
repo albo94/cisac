@@ -5,10 +5,13 @@
 <title>CISAC – La nostra squadra</title>
 <!-- Vecchio indirizzo del sito Wix (/team), indicizzato da Google. GitHub Pages non fa
      redirect lato server: un meta refresh a 0 secondi viene trattato da Google come
-     spostamento definitivo. Non va messo nella sitemap. -->
+     spostamento definitivo. Non va messo nella sitemap.
+     NIENTE "noindex" qui: Google sconsiglia di combinarlo con rel=canonical, perché il
+     noindex può essere trasferito alla pagina di destinazione (squadra.html), che invece
+     deve restare indicizzata. Il canonical da solo basta: in Search Console la pagina
+     risulta infatti "Pagina alternativa con tag canonical appropriato". -->
 <link rel="canonical" href="https://www.cisac.it/squadra.html">
 <meta http-equiv="refresh" content="0; url=/squadra.html">
-<meta name="robots" content="noindex">
 <script>location.replace('/squadra.html' + location.hash);</script>
 </head>
 <body>
